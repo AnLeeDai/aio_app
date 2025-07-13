@@ -1,9 +1,10 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { Link } from "@heroui/link";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import clsx from "clsx";
 
 import { Providers } from "./providers";
+import { Analytics } from "@vercel/analytics/next";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
@@ -38,9 +39,12 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background font-sans antialiased",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
+        <SpeedInsights />
+        <Analytics />
+
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <Navbar />
