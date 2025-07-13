@@ -1,10 +1,10 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Next.js + HeroUI",
-  description: "Make beautiful websites regardless of your design experience.",
+  name: "AIO APPS",
+  description: "AIO APPS is a collection of useful applications.",
 
   links: {
-    sponsor: "https://github.com/heroui-inc/heroui",
+    sponsor: "https://github.com/AnLeeDai/aio_app",
   },
 };
