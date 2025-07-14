@@ -5,23 +5,23 @@ import { useState } from "react";
 
 import TitleHeader from "../title-header";
 
-import PasswordGenerateConfig from "./password-generate-config";
-import PasswordGenerateResult from "./password-generate-result";
+import DOBGenerateConfig from "./dob-generate-config";
+import DOBGenerateResult from "./dob-generate-result";
 
-import { usePasswordGenerate } from "@/hooks/use-password-generate";
+import { useDOBGenerate } from "@/hooks/use-dob-generate";
 
-export default function PasswordGenerateContainers() {
+export default function DOBGenerateContainers() {
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
-  const [password, setPassword] = useState<string[]>([]);
+  const [dob, setDOB] = useState<string[]>([]);
 
-  const { mutate, isPending } = usePasswordGenerate({
+  const { mutate, isPending } = useDOBGenerate({
     onSuccess: (data) => {
       addToast({
         title: "Success",
         description: data.message,
         color: "success",
       });
-      setPassword(data.data);
+      setDOB(data.data);
       setSelectedKeys(new Set());
     },
 
@@ -32,7 +32,7 @@ export default function PasswordGenerateContainers() {
 
   return (
     <section>
-      <TitleHeader title="Password Generate" />
+      <TitleHeader title="DOB Generate" />
 
       <div
         className="
@@ -41,10 +41,10 @@ export default function PasswordGenerateContainers() {
                 lg:grid-cols-[320px_1fr]
               "
       >
-        <PasswordGenerateConfig isLoading={isPending} onGenerate={mutate} />
+        <DOBGenerateConfig isLoading={isPending} onGenerate={mutate} />
 
-        <PasswordGenerateResult
-          data={password}
+        <DOBGenerateResult
+          data={dob}
           selectedKeys={selectedKeys}
           setSelectedKeys={setSelectedKeys}
         />

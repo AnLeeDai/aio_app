@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardBody,
@@ -11,22 +13,22 @@ import GroupButtonCopy from "../group-button-copy";
 
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 
-interface PasswordGenerateResultProps {
+interface DOBGenerateResultProps {
   selectedKeys: Set<string>;
   setSelectedKeys: (keys: Set<string>) => void;
   data: string[];
 }
 
-export default function PasswordGenerateResult({
+export default function DOBGenerateResult({
   selectedKeys,
   setSelectedKeys,
   data,
-}: PasswordGenerateResultProps) {
-  const copyNames = useCopyToClipboard(
-    data || [],
+}: DOBGenerateResultProps) {
+  const copyDOB = useCopyToClipboard(
+    data,
     selectedKeys,
     setSelectedKeys,
-    "name",
+    "dob",
   );
 
   return (
@@ -37,11 +39,11 @@ export default function PasswordGenerateResult({
     >
       <CardHeader className="w-full">
         <GroupButtonCopy
-          selectedCount={selectedKeys?.size}
-          totalCount={data ? data.length : 0}
-          onCopyAll={copyNames.copyAll}
-          onCopySelected={copyNames.copySelected}
-          onResetSelection={copyNames.resetSelection}
+          selectedCount={selectedKeys.size}
+          totalCount={data.length}
+          onCopyAll={copyDOB.copyAll}
+          onCopySelected={copyDOB.copySelected}
+          onResetSelection={copyDOB.resetSelection}
         />
       </CardHeader>
 
@@ -49,7 +51,7 @@ export default function PasswordGenerateResult({
 
       <CardBody>
         <Listbox
-          label="Generated Password"
+          label="Generated DOBs"
           selectedKeys={selectedKeys}
           selectionMode="multiple"
           variant="flat"
@@ -61,8 +63,8 @@ export default function PasswordGenerateResult({
             )
           }
         >
-          {(data || []).map((name) => (
-            <ListboxItem key={name}>{name}</ListboxItem>
+          {data.map((dob) => (
+            <ListboxItem key={dob}>{dob}</ListboxItem>
           ))}
         </Listbox>
       </CardBody>

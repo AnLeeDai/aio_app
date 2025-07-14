@@ -13,49 +13,48 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { IconDice6Filled } from "@tabler/icons-react";
 
-import {
-  INCLUDE_SPECIAL_CHARS_OPTIONS,
-  INCLUDE_UPPERCASE_OPTIONS,
-} from "./password-generate-data";
+import { DATE_FORMAT_OPTIONS } from "./dob-generate-data";
 
-interface PasswordGenForm {
-  password_num: number;
-  password_length: number;
-  include_special_chars: boolean;
-  is_uppercase: boolean;
+export interface DOBGenForm {
+  dob_num: number;
+  min_age: number;
+  max_age: number;
+  date_format: string;
 }
 
-interface PasswordGenerateConfigProps {
-  onGenerate: (params: PasswordGenForm) => void;
+interface DOBGenerateConfigProps {
+  onGenerate: (params: DOBGenForm) => void;
   isLoading: boolean;
 }
 
-export default function PasswordGenerateConfig({
+export default function DOBGenerateConfig({
   onGenerate,
   isLoading,
-}: PasswordGenerateConfigProps) {
+}: DOBGenerateConfigProps) {
   const {
     control,
     handleSubmit,
+    watch,
     formState: { errors },
-  } = useForm<PasswordGenForm>({
+  } = useForm<DOBGenForm>({
     defaultValues: {
-      password_num: 10,
-      password_length: 12,
-      include_special_chars: false,
-      is_uppercase: false,
+      dob_num: 10,
+      min_age: 18,
+      max_age: 30,
+      date_format: "d/m/Y",
     },
   });
 
-  const onSubmit = handleSubmit((values) => {
-    onGenerate({ ...values });
-  });
+  /* --- watch to validate max_age >= min_age --- */
+  const minAge = watch("min_age");
+
+  const onSubmit = handleSubmit((v) => onGenerate(v));
 
   return (
     <Card as="form" onSubmit={onSubmit}>
       <CardHeader>
         <h2 className="text-lg font-semibold">
-          Select options to generate random password.
+          Select options to generate random DOB
         </h2>
       </CardHeader>
 
@@ -63,17 +62,17 @@ export default function PasswordGenerateConfig({
 
       <CardBody>
         <div className="flex flex-col gap-4">
-          {/* -------- password_num -------- */}
+          {/* ---------- dob_num ---------- */}
           <Controller
             control={control}
-            name="password_num"
+            name="dob_num"
             render={({ field, fieldState }) => (
               <Input
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Number of passwords"
-                placeholder="e.g. 10"
+                label="Number of DOBs"
+                placeholder="e.g. 100"
                 type="number"
                 value={field.value !== undefined ? String(field.value) : ""}
                 onChange={(e) => field.onChange(+e.target.value)}
@@ -86,17 +85,17 @@ export default function PasswordGenerateConfig({
             }}
           />
 
-          {/* -------- password_length ------ */}
+          {/* ---------- min_age ---------- */}
           <Controller
             control={control}
-            name="password_length"
+            name="min_age"
             render={({ field, fieldState }) => (
               <Input
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Password length"
-                placeholder="e.g. 12"
+                label="Min age"
+                placeholder="e.g. 18"
                 type="number"
                 value={field.value !== undefined ? String(field.value) : ""}
                 onChange={(e) => field.onChange(+e.target.value)}
@@ -104,50 +103,55 @@ export default function PasswordGenerateConfig({
             )}
             rules={{
               required: "Required",
-              min: { value: 6, message: "Min 6" },
-              max: { value: 64, message: "Max 64" },
+              min: { value: 18, message: "Min 18" },
+              max: { value: 100, message: "Max 100" },
             }}
           />
 
-          {/* -------- include_special_chars -------- */}
+          {/* ---------- max_age ---------- */}
           <Controller
             control={control}
-            name="include_special_chars"
+            name="max_age"
+            render={({ field, fieldState }) => (
+              <Input
+                {...field}
+                errorMessage={fieldState.error?.message}
+                isInvalid={!!fieldState.error}
+                label="Max age"
+                placeholder="e.g. 30"
+                type="number"
+                value={field.value !== undefined ? String(field.value) : ""}
+                onChange={(e) => field.onChange(+e.target.value)}
+              />
+            )}
+            rules={{
+              required: "Required",
+              min: { value: 0, message: "Min 0" },
+              max: { value: 120, message: "Max 120" },
+              validate: (v) => v >= minAge || "Max age must be ≥ Min age",
+            }}
+          />
+
+          {/* ---------- date_format ---------- */}
+          <Controller
+            control={control}
+            name="date_format"
             render={({ field }) => (
               <Select
-                label="Include special characters"
-                selectedKeys={[String(field.value)]}
+                label="Date format"
+                selectedKeys={[field.value]}
                 onSelectionChange={(keys) =>
-                  field.onChange(Array.from(keys)[0] === "true")
+                  field.onChange(Array.from(keys)[0])
                 }
               >
-                {INCLUDE_SPECIAL_CHARS_OPTIONS.map((o) => (
-                  <SelectItem key={String(o.key)}>{o.label}</SelectItem>
+                {DATE_FORMAT_OPTIONS.map((o) => (
+                  <SelectItem key={o.key}>{o.label}</SelectItem>
                 ))}
               </Select>
             )}
           />
 
-          {/* -------- is_uppercase -------- */}
-          <Controller
-            control={control}
-            name="is_uppercase"
-            render={({ field }) => (
-              <Select
-                label="Include uppercase"
-                selectedKeys={[String(field.value)]}
-                onSelectionChange={(keys) =>
-                  field.onChange(Array.from(keys)[0] === "true")
-                }
-              >
-                {INCLUDE_UPPERCASE_OPTIONS.map((o) => (
-                  <SelectItem key={String(o.key)}>{o.label}</SelectItem>
-                ))}
-              </Select>
-            )}
-          />
-
-          {/* -------- submit button -------- */}
+          {/* ---------- submit ---------- */}
           <Button
             className="w-full"
             color="primary"
@@ -156,7 +160,7 @@ export default function PasswordGenerateConfig({
             startContent={<IconDice6Filled size={22} />}
             type="submit"
           >
-            Generate Password
+            Generate DOB
           </Button>
         </div>
       </CardBody>

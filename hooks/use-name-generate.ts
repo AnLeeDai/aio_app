@@ -25,7 +25,7 @@ export const useNamesGenerate = (
     NamesGenerateResponse,
     ResponseErr,
     NamesGenerateParams
-  >
+  >,
 ) =>
   useMutation({
     mutationFn: namesGenerate,
