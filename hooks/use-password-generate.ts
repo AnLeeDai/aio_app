@@ -24,7 +24,7 @@ export const usePasswordGenerate = (
     PasswordGenerateResponse,
     ResponseErr,
     PasswordGenerateParams
-  >
+  >,
 ) =>
   useMutation({
     mutationFn: passwordGenerate,

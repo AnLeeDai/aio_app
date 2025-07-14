@@ -1,7 +1,8 @@
 import TitleHeader from "../title-header";
 
-import CardCategories from "@/components/card-categories";
 import { allCategories } from "./home-categories-data";
+
+import CardCategories from "@/components/card-categories";
 
 export default function HomeContainers() {
   return (

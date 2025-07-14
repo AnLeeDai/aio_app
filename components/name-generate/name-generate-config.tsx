@@ -69,31 +69,31 @@ export default function NameGenerateConfig({
         <div className="flex flex-col gap-4">
           {/* -------- name_number -------- */}
           <Controller
-            name="name_number"
             control={control}
+            name="name_number"
+            render={({ field, fieldState }) => (
+              <Input
+                {...field}
+                errorMessage={fieldState.error?.message}
+                isInvalid={!!fieldState.error}
+                label="Number of names"
+                placeholder="e.g. 10"
+                type="number"
+                value={field.value !== undefined ? String(field.value) : ""}
+                onChange={(e) => field.onChange(+e.target.value)}
+              />
+            )}
             rules={{
               required: "Required",
               min: { value: 1, message: "Min 1" },
               max: { value: 100, message: "Max 100" },
             }}
-            render={({ field, fieldState }) => (
-              <Input
-                {...field}
-                type="number"
-                label="Number of names"
-                placeholder="e.g. 10"
-                value={field.value !== undefined ? String(field.value) : ""}
-                onChange={(e) => field.onChange(+e.target.value)}
-                isInvalid={!!fieldState.error}
-                errorMessage={fieldState.error?.message}
-              />
-            )}
           />
 
           {/* -------- country (2-letter) -------- */}
           <Controller
-            name="country"
             control={control}
+            name="country"
             render={({ field }) => (
               <Select
                 label="Select a locale"
@@ -111,8 +111,8 @@ export default function NameGenerateConfig({
 
           {/* -------- name_format -------- */}
           <Controller
-            name="name_format"
             control={control}
+            name="name_format"
             render={({ field }) => (
               <Select
                 label="Select name format"
@@ -130,8 +130,8 @@ export default function NameGenerateConfig({
 
           {/* -------- gender (male|female|random) -------- */}
           <Controller
-            name="gender"
             control={control}
+            name="gender"
             render={({ field }) => (
               <Select
                 label="Select gender"
@@ -149,8 +149,8 @@ export default function NameGenerateConfig({
 
           {/* -------- trans_ascii -------- */}
           <Controller
-            name="trans_ascii"
             control={control}
+            name="trans_ascii"
             render={({ field }) => (
               <Select
                 label="Transliterate to ASCII"
@@ -168,12 +168,12 @@ export default function NameGenerateConfig({
 
           {/* -------- submit -------- */}
           <Button
-            type="submit"
             className="w-full"
             color="primary"
+            isLoading={isLoading}
             size="lg"
             startContent={<IconDice6Filled size={22} />}
-            isLoading={isLoading}
+            type="submit"
           >
             Generate Names
           </Button>

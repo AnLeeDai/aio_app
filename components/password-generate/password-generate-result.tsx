@@ -6,7 +6,9 @@ import {
   Listbox,
   ListboxItem,
 } from "@heroui/react";
+
 import GroupButtonCopy from "../group-button-copy";
+
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 
 interface PasswordGenerateResultProps {
@@ -24,7 +26,7 @@ export default function PasswordGenerateResult({
     data || [],
     selectedKeys,
     setSelectedKeys,
-    "name"
+    "name",
   );
 
   return (
@@ -55,7 +57,7 @@ export default function PasswordGenerateResult({
             setSelectedKeys(
               typeof keys === "string"
                 ? new Set([keys])
-                : new Set(keys as Iterable<string>)
+                : new Set(keys as Iterable<string>),
             )
           }
         >

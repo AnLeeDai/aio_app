@@ -2,9 +2,12 @@
 
 import { addToast } from "@heroui/react";
 import { useState } from "react";
+
 import TitleHeader from "../title-header";
+
 import PasswordGenerateConfig from "./password-generate-config";
 import PasswordGenerateResult from "./password-generate-result";
+
 import { usePasswordGenerate } from "@/hooks/use-password-generate";
 
 export default function PasswordGenerateContainers() {

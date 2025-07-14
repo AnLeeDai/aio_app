@@ -11,11 +11,12 @@ import {
   CardHeader,
 } from "@heroui/react";
 import { Controller, useForm } from "react-hook-form";
+import { IconDice6Filled } from "@tabler/icons-react";
+
 import {
   INCLUDE_SPECIAL_CHARS_OPTIONS,
   INCLUDE_UPPERCASE_OPTIONS,
 } from "./password-generate-data";
-import { IconDice6Filled } from "@tabler/icons-react";
 
 interface PasswordGenForm {
   password_num: number;
@@ -64,54 +65,54 @@ export default function PasswordGenerateConfig({
         <div className="flex flex-col gap-4">
           {/* -------- password_num -------- */}
           <Controller
-            name="password_num"
             control={control}
+            name="password_num"
+            render={({ field, fieldState }) => (
+              <Input
+                {...field}
+                errorMessage={fieldState.error?.message}
+                isInvalid={!!fieldState.error}
+                label="Number of passwords"
+                placeholder="e.g. 10"
+                type="number"
+                value={field.value !== undefined ? String(field.value) : ""}
+                onChange={(e) => field.onChange(+e.target.value)}
+              />
+            )}
             rules={{
               required: "Required",
               min: { value: 1, message: "Min 1" },
               max: { value: 100, message: "Max 100" },
             }}
-            render={({ field, fieldState }) => (
-              <Input
-                {...field}
-                type="number"
-                label="Number of passwords"
-                placeholder="e.g. 10"
-                value={field.value !== undefined ? String(field.value) : ""}
-                onChange={(e) => field.onChange(+e.target.value)}
-                isInvalid={!!fieldState.error}
-                errorMessage={fieldState.error?.message}
-              />
-            )}
           />
 
           {/* -------- password_length ------ */}
           <Controller
-            name="password_length"
             control={control}
+            name="password_length"
+            render={({ field, fieldState }) => (
+              <Input
+                {...field}
+                errorMessage={fieldState.error?.message}
+                isInvalid={!!fieldState.error}
+                label="Password length"
+                placeholder="e.g. 12"
+                type="number"
+                value={field.value !== undefined ? String(field.value) : ""}
+                onChange={(e) => field.onChange(+e.target.value)}
+              />
+            )}
             rules={{
               required: "Required",
               min: { value: 6, message: "Min 6" },
               max: { value: 64, message: "Max 64" },
             }}
-            render={({ field, fieldState }) => (
-              <Input
-                {...field}
-                type="number"
-                label="Password length"
-                placeholder="e.g. 12"
-                value={field.value !== undefined ? String(field.value) : ""}
-                onChange={(e) => field.onChange(+e.target.value)}
-                isInvalid={!!fieldState.error}
-                errorMessage={fieldState.error?.message}
-              />
-            )}
           />
 
           {/* -------- include_special_chars -------- */}
           <Controller
-            name="include_special_chars"
             control={control}
+            name="include_special_chars"
             render={({ field }) => (
               <Select
                 label="Include special characters"
@@ -129,8 +130,8 @@ export default function PasswordGenerateConfig({
 
           {/* -------- is_uppercase -------- */}
           <Controller
-            name="is_uppercase"
             control={control}
+            name="is_uppercase"
             render={({ field }) => (
               <Select
                 label="Include uppercase"
@@ -148,12 +149,12 @@ export default function PasswordGenerateConfig({
 
           {/* -------- submit button -------- */}
           <Button
-            type="submit"
             className="w-full"
             color="primary"
+            isLoading={isLoading}
             size="lg"
             startContent={<IconDice6Filled size={22} />}
-            isLoading={isLoading}
+            type="submit"
           >
             Generate Password
           </Button>
