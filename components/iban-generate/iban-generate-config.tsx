@@ -29,11 +29,7 @@ export default function IBANGenerateConfig({
   onGenerate,
   isLoading,
 }: IBANGenerateConfigProps) {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IBANGenForm>({
+  const { control, handleSubmit } = useForm<IBANGenForm>({
     defaultValues: {
       iban_number: 10,
       country: "BR",
@@ -56,32 +52,31 @@ export default function IBANGenerateConfig({
         <div className="flex flex-col gap-4">
           {/* ---------- iban_number ---------- */}
           <Controller
-            name="iban_number"
             control={control}
+            name="iban_number"
+            render={({ field, fieldState }) => (
+              <Input
+                {...field}
+                errorMessage={fieldState.error?.message}
+                isInvalid={!!fieldState.error}
+                label="Number of IBANs"
+                placeholder="e.g. 10"
+                type="number"
+                value={field.value !== undefined ? String(field.value) : ""}
+                onChange={(e) => field.onChange(+e.target.value)}
+              />
+            )}
             rules={{
               required: "Required",
               min: { value: 1, message: "Min 1" },
               max: { value: 100, message: "Max 100" },
             }}
-            render={({ field, fieldState }) => (
-              <Input
-                {...field}
-                type="number"
-                label="Number of IBANs"
-                placeholder="e.g. 10"
-                value={field.value !== undefined ? String(field.value) : ""}
-                onChange={(e) => field.onChange(+e.target.value)}
-                isInvalid={!!fieldState.error}
-                errorMessage={fieldState.error?.message}
-              />
-            )}
           />
 
           {/* ---------- country (only BR) ---------- */}
           <Controller
-            name="country"
             control={control}
-            rules={{ required: true }}
+            name="country"
             render={({ field }) => (
               <Select
                 label="Country"
@@ -95,16 +90,17 @@ export default function IBANGenerateConfig({
                 ))}
               </Select>
             )}
+            rules={{ required: true }}
           />
 
           {/* ---------- submit ---------- */}
           <Button
-            type="submit"
             className="w-full"
             color="primary"
+            isLoading={isLoading}
             size="lg"
             startContent={<IconDice6Filled size={22} />}
-            isLoading={isLoading}
+            type="submit"
           >
             Generate IBANs
           </Button>

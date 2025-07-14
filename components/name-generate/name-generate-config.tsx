@@ -37,17 +37,13 @@ export default function NameGenerateConfig({
   onGenerate,
   isLoading,
 }: NameGenerateConfigProps) {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<NameGenForm>({
+  const { control, handleSubmit } = useForm<NameGenForm>({
     defaultValues: {
       name_number: 10,
       name_format: "first_last",
       country: "BR",
       gender: "male",
-      trans_ascii: true,
+      trans_ascii: false,
     },
   });
 
@@ -128,7 +124,7 @@ export default function NameGenerateConfig({
             )}
           />
 
-          {/* -------- gender (male|female|random) -------- */}
+          {/* -------- gender (male|female) -------- */}
           <Controller
             control={control}
             name="gender"

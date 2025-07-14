@@ -13,18 +13,22 @@ export function useCopyToClipboard(
   rawItems: ItemInput[],
   selectedKeys: Set<string>,
   setSelectedKeys: (v: Set<string>) => void,
-  itemLabel = "item"
+  itemLabel = "item",
 ) {
   const items: CopyItem[] = (() => {
     const seen = new Map<string, number>(); // chống trùng key khi dùng string[]
+
     return rawItems.map((it, idx) => {
       if (typeof it === "string") {
         const base = it;
         const dup = seen.get(base) ?? 0;
+
         seen.set(base, dup + 1);
         const id = dup === 0 ? base : `${base}-${idx}`; // đảm bảo unique
+
         return { id, label: it };
       }
+
       return it;
     });
   })();
@@ -41,16 +45,16 @@ export function useCopyToClipboard(
             description: `Copied ${list.length} ${itemLabel}${
               list.length > 1 ? "s" : ""
             }.`,
-          })
+          }),
         )
         .catch(() =>
           addToast({
             color: "warning",
             title: "Copy failed",
             description: "Your browser blocked clipboard access.",
-          })
+          }),
         ),
-    [itemLabel]
+    [itemLabel],
   );
 
   /* Helpers ----------------------------------------------------- */
@@ -62,12 +66,14 @@ export function useCopyToClipboard(
   /* Copy Selected ---------------------------------------------- */
   const copySelected = useCallback(() => {
     const list = buildList(selectedKeys);
+
     if (!list.length) {
       addToast({
         color: "warning",
         title: "Nothing selected",
         description: `Please choose at least one ${itemLabel}.`,
       });
+
       return;
     }
     copyRaw(list);
@@ -81,6 +87,7 @@ export function useCopyToClipboard(
         title: "Empty list",
         description: `There is no ${itemLabel} to copy.`,
       });
+
       return;
     }
     copyRaw(buildList());

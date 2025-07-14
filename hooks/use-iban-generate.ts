@@ -22,7 +22,7 @@ export const useIBANGenerate = (
     IBANGenerateResponse,
     ResponseErr,
     IBANGenerateParams
-  >
+  >,
 ) =>
   useMutation({
     mutationFn: ibanGenerate,

@@ -23,7 +23,7 @@ export const usePassportExpireDateGenerate = (
     PassportExpireDateGenerateResponse,
     ResponseErr,
     PassportExpireDateGenerateParams
-  >
+  >,
 ) =>
   useMutation({
     mutationFn: passportExpireDateGenerate,

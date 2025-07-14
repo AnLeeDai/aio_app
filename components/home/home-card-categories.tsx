@@ -40,12 +40,11 @@ export default function HomeCardCategories({
       ? "/imgs/demo_darkmode_cover.png"
       : "/imgs/demo_lightmode_cover.png";
 
-  const coverSrc =
-    state === "coming"
+  const coverSrc = isDemo
+    ? switchDemoCover
+    : state === "coming"
       ? switchComingCover
-      : state === "demo"
-        ? switchDemoCover
-        : cover;
+      : cover;
 
   if (!mounted) {
     return (
@@ -64,17 +63,17 @@ export default function HomeCardCategories({
       <CardBody>
         <b
           className={
-            state === "coming"
-              ? "text-default-500"
-              : state === "demo"
-                ? "text-warning"
+            isDemo
+              ? "text-warning"
+              : state === "coming"
+                ? "text-default-500"
                 : ""
           }
         >
           {children}&nbsp;
-          {state === "active" && "(Active)"}
-          {state === "demo" && "(Demo)"}
-          {state === "coming" && "(Coming Soon)"}
+          {isDemo && "(Demo)"}
+          {!isDemo && state === "active" && "(Active)"}
+          {!isDemo && state === "coming" && "(Coming Soon)"}
         </b>
       </CardBody>
 

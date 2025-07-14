@@ -51,7 +51,7 @@ export const passportExpireDateGenerate = async (payload: {
 }) => {
   const { data } = await axiosInstance.post(
     "/api/passports/generate/date",
-    payload
+    payload,
   );
 
   return data;
@@ -62,6 +62,18 @@ export const ibanGenerate = async (payload: {
   country: string;
 }) => {
   const { data } = await axiosInstance.post("/api/ibans/generate", payload);
+
+  return data;
+};
+
+export const locationGenerate = async (payload: {
+  limit: number;
+  country: string;
+  state: string;
+  city: string;
+  trans_ascii: boolean;
+}) => {
+  const { data } = await axiosInstance.post("api/locations/generate", payload);
 
   return data;
 };

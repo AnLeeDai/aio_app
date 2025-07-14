@@ -8,7 +8,9 @@ import {
   Listbox,
   ListboxItem,
 } from "@heroui/react";
+
 import GroupButtonCopy from "../group-button-copy";
+
 import { useCopyToClipboard, CopyItem } from "@/hooks/use-copy-to-clipboard";
 
 /* ------ API record ------ */
@@ -36,7 +38,7 @@ export default function PassportExpireDateResult({
     rows,
     selectedKeys,
     setSelectedKeys,
-    "date"
+    "date",
   );
 
   return (
@@ -63,7 +65,7 @@ export default function PassportExpireDateResult({
             setSelectedKeys(
               typeof keys === "string"
                 ? new Set([keys])
-                : new Set(keys as Iterable<string>)
+                : new Set(keys as Iterable<string>),
             )
           }
         >

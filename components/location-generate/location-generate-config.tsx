@@ -1,55 +1,54 @@
 "use client";
 
 import {
-  Select,
-  SelectItem,
   Input,
   Button,
   Card,
   CardBody,
   Divider,
   CardHeader,
+  Select,
+  SelectItem,
 } from "@heroui/react";
 import { Controller, useForm } from "react-hook-form";
 import { IconDice6Filled } from "@tabler/icons-react";
 
-import { DATE_FORMAT_OPTIONS } from "./dob-generate-data";
+import { TRANS_ASCII_OPTIONS } from "./location-generate-data";
 
-export interface DOBGenForm {
-  dob_num: number;
-  min_age: number;
-  max_age: number;
-  date_format: string;
+export interface LocationGenForm {
+  limit: number;
+  country: string;
+  state: string;
+  city: string;
+  trans_ascii: boolean;
 }
 
-interface DOBGenerateConfigProps {
-  onGenerate: (params: DOBGenForm) => void;
+interface LocationGenerateConfigProps {
+  onGenerate: (params: LocationGenForm) => void;
   isLoading: boolean;
 }
 
-export default function DOBGenerateConfig({
+export default function LocationGenerateConfig({
   onGenerate,
   isLoading,
-}: DOBGenerateConfigProps) {
-  const { control, handleSubmit, watch } = useForm<DOBGenForm>({
+}: LocationGenerateConfigProps) {
+  const { control, handleSubmit } = useForm<LocationGenForm>({
     defaultValues: {
-      dob_num: 10,
-      min_age: 18,
-      max_age: 30,
-      date_format: "d/m/Y",
+      limit: 10,
+      country: "Brazil",
+      state: "São Paulo",
+      city: "",
+      trans_ascii: false,
     },
   });
 
-  /* --- watch to validate max_age >= min_age --- */
-  const minAge = watch("min_age");
-
-  const onSubmit = handleSubmit((v) => onGenerate(v));
+  const submit = handleSubmit((v) => onGenerate(v));
 
   return (
-    <Card as="form" onSubmit={onSubmit}>
+    <Card as="form" onSubmit={submit}>
       <CardHeader>
         <h2 className="text-lg font-semibold">
-          Select options to generate random DOB
+          Select options to generate random locations
         </h2>
       </CardHeader>
 
@@ -57,17 +56,17 @@ export default function DOBGenerateConfig({
 
       <CardBody>
         <div className="flex flex-col gap-4">
-          {/* ---------- dob_num ---------- */}
+          {/* ---------- limit ---------- */}
           <Controller
             control={control}
-            name="dob_num"
+            name="limit"
             render={({ field, fieldState }) => (
               <Input
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Number of DOBs"
-                placeholder="e.g. 100"
+                label="Number of locations"
+                placeholder="e.g. 10"
                 type="number"
                 value={field.value !== undefined ? String(field.value) : ""}
                 onChange={(e) => field.onChange(+e.target.value)}
@@ -76,71 +75,80 @@ export default function DOBGenerateConfig({
             rules={{
               required: "Required",
               min: { value: 1, message: "Min 1" },
-              max: { value: 100, message: "Max 100" },
+              max: { value: 10000, message: "Max 10 000" },
             }}
           />
 
-          {/* ---------- min_age ---------- */}
+          {/* ---------- country ---------- */}
           <Controller
             control={control}
-            name="min_age"
+            name="country"
             render={({ field, fieldState }) => (
               <Input
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Min age"
-                placeholder="e.g. 18"
-                type="number"
-                value={field.value !== undefined ? String(field.value) : ""}
-                onChange={(e) => field.onChange(+e.target.value)}
+                label="Country"
+                placeholder="e.g. Brazil"
               />
             )}
             rules={{
               required: "Required",
-              min: { value: 18, message: "Min 18" },
-              max: { value: 100, message: "Max 100" },
+              maxLength: { value: 100, message: "Max 100 characters" },
             }}
           />
 
-          {/* ---------- max_age ---------- */}
+          {/* ---------- state (required) ---------- */}
           <Controller
             control={control}
-            name="max_age"
+            name="state"
             render={({ field, fieldState }) => (
               <Input
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Max age"
-                placeholder="e.g. 30"
-                type="number"
-                value={field.value !== undefined ? String(field.value) : ""}
-                onChange={(e) => field.onChange(+e.target.value)}
+                label="State"
+                placeholder="e.g. São Paulo"
               />
             )}
             rules={{
               required: "Required",
-              min: { value: 0, message: "Min 0" },
-              max: { value: 120, message: "Max 120" },
-              validate: (v) => v >= minAge || "Max age must be ≥ Min age",
+              maxLength: { value: 100, message: "Max 100 characters" },
             }}
           />
 
-          {/* ---------- date_format ---------- */}
+          {/* ---------- city (optional) ---------- */}
           <Controller
             control={control}
-            name="date_format"
+            name="city"
+            render={({ field, fieldState }) => (
+              <Input
+                {...field}
+                errorMessage={fieldState.error?.message}
+                isInvalid={!!fieldState.error}
+                label="City (optional)"
+                placeholder="e.g. Campinas"
+              />
+            )}
+            rules={{
+              maxLength: { value: 100, message: "Max 100 characters" },
+            }}
+          />
+
+          {/* ---------- Transliterate to ASCII ---------- */}
+          <Controller
+            control={control}
+            name="trans_ascii"
             render={({ field }) => (
               <Select
-                label="Date format"
-                selectedKeys={[field.value]}
-                onSelectionChange={(keys) =>
-                  field.onChange(Array.from(keys)[0])
+                label="Transliterate to ASCII"
+                selectedKeys={[String(field.value)]}
+                onSelectionChange={(k) =>
+                  field.onChange(Array.from(k)[0] === "true")
                 }
               >
-                {DATE_FORMAT_OPTIONS.map((o) => (
-                  <SelectItem key={o.key}>{o.label}</SelectItem>
+                {TRANS_ASCII_OPTIONS.map((o) => (
+                  <SelectItem key={String(o.key)}>{o.label}</SelectItem>
                 ))}
               </Select>
             )}
@@ -155,7 +163,7 @@ export default function DOBGenerateConfig({
             startContent={<IconDice6Filled size={22} />}
             type="submit"
           >
-            Generate DOB
+            Generate Locations
           </Button>
         </div>
       </CardBody>

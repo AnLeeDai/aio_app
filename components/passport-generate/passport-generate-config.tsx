@@ -100,7 +100,7 @@ export default function PassportGenerateConfig({
                     e.target.value
                       .toUpperCase()
                       .replace(/[^A-Z]/g, "")
-                      .slice(0, prefixLimit)
+                      .slice(0, prefixLimit),
                   )
                 }
               />

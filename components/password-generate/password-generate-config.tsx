@@ -34,11 +34,7 @@ export default function PasswordGenerateConfig({
   onGenerate,
   isLoading,
 }: PasswordGenerateConfigProps) {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<PasswordGenForm>({
+  const { control, handleSubmit } = useForm<PasswordGenForm>({
     defaultValues: {
       password_num: 10,
       password_length: 12,
