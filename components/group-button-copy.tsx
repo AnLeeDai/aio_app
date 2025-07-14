@@ -32,7 +32,7 @@ export default function GroupButtonCopy({
   return (
     <ScrollShadow
       hideScrollBar
-      className="flex items-center justify-end w-full bg-background/70 backdrop-blur-sm py-2"
+      className="flex items-center justify-end w-full"
       orientation="horizontal"
     >
       <div className="flex gap-2 items-center">
