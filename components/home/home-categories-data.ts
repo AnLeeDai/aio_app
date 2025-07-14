@@ -45,7 +45,7 @@ export const allCategories = [
     name: "IBAN Generate",
     href: siteConfig.routes.ibanGenerate,
     description: "Generate IBAN numbers",
-    isActive: false,
+    isActive: true,
     isDemo: false,
     cover: "/imgs/iban_generate_cover.png",
   },
