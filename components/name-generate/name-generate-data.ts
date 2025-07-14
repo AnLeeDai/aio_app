@@ -27,8 +27,3 @@ export const TRANS_ASCII_OPTIONS = [
   { key: "true", label: "Yes" },
   { key: "false", label: "No" },
 ];
-
-export const FakeNameList = Array.from(
-  { length: 100 },
-  (_, i) => `Name ${i + 1}`,
-);

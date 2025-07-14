@@ -25,6 +25,7 @@
     "@react-aria/visually-hidden": "3.8.24",
     "@tabler/icons-react": "^3.34.0",
     "@tanstack/react-query": "^5.83.0",
+    "@tanstack/react-query-devtools": "^5.83.0",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "axios": "^1.10.0",
@@ -34,7 +35,8 @@
     "next": "15.3.1",
     "next-themes": "0.4.6",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "react-hook-form": "^7.60.0"
   },
   "devDependencies": {
     "@eslint/compat": "1.2.8",
