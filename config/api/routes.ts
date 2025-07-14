@@ -56,3 +56,12 @@ export const passportExpireDateGenerate = async (payload: {
 
   return data;
 };
+
+export const ibanGenerate = async (payload: {
+  iban_number: number;
+  country: string;
+}) => {
+  const { data } = await axiosInstance.post("/api/ibans/generate", payload);
+
+  return data;
+};
