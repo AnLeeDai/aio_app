@@ -56,7 +56,7 @@ export default function CardCategories({
     </>
   );
 
-  if (state === "active" || state === "demo") {
+  if (state === "active") {
     return (
       <Link aria-label={`${children} ${state}`} href={href}>
         <Card isPressable shadow="lg">
