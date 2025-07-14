@@ -13,9 +13,11 @@ import {
   CardHeader,
 } from "@heroui/react";
 import { useState } from "react";
+import { IconDice6Filled } from "@tabler/icons-react";
 
 import TitleHeader from "../title-header";
-import { IconDice6Filled } from "@tabler/icons-react";
+import GroupButtonCopy from "../group-button-copy";
+
 import {
   FakeNameList,
   LOCALE_OPTIONS,
@@ -23,8 +25,8 @@ import {
   GENDER_OPTIONS,
   TRANS_ASCII_OPTIONS,
 } from "./name-generate-data";
+
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
-import GroupButtonCopy from "../group-button-copy";
 
 export default function NameGenerateContainer() {
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
@@ -33,7 +35,7 @@ export default function NameGenerateContainer() {
     FakeNameList,
     selectedKeys,
     setSelectedKeys,
-    "name"
+    "name",
   );
 
   return (
@@ -59,10 +61,10 @@ export default function NameGenerateContainer() {
           <CardBody>
             <div className="flex flex-col gap-4">
               <Input
-                label="Enter number of names to generate"
-                placeholder="e.g. 10"
                 aria-label="Name input"
                 defaultValue="10"
+                label="Enter number of names to generate"
+                placeholder="e.g. 10"
               />
 
               <Select defaultSelectedKeys={["BR"]} label="Select a locale">
@@ -96,10 +98,10 @@ export default function NameGenerateContainer() {
               </Select>
 
               <Button
-                color="primary"
                 className="w-full"
-                startContent={<IconDice6Filled size={22} />}
+                color="primary"
                 size="lg"
+                startContent={<IconDice6Filled size={22} />}
               >
                 Generate Names
               </Button>
@@ -114,10 +116,10 @@ export default function NameGenerateContainer() {
         >
           <CardHeader className="w-full">
             <GroupButtonCopy
-              totalCount={FakeNameList.length}
               selectedCount={selectedKeys.size}
-              onCopySelected={copyNames.copySelected}
+              totalCount={FakeNameList.length}
               onCopyAll={copyNames.copyAll}
+              onCopySelected={copyNames.copySelected}
               onResetSelection={copyNames.resetSelection}
             />
           </CardHeader>
@@ -127,16 +129,16 @@ export default function NameGenerateContainer() {
           <CardBody>
             <Listbox
               label="Generated Names"
-              selectionMode="multiple"
               selectedKeys={selectedKeys}
+              selectionMode="multiple"
+              variant="flat"
               onSelectionChange={(keys) =>
                 setSelectedKeys(
                   typeof keys === "string"
                     ? new Set([keys])
-                    : new Set(keys as Iterable<string>)
+                    : new Set(keys as Iterable<string>),
                 )
               }
-              variant="flat"
             >
               {FakeNameList.map((name) => (
                 <ListboxItem key={name}>{name}</ListboxItem>

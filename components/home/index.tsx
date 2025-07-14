@@ -1,6 +1,7 @@
+import TitleHeader from "../title-header";
+
 import CardCategories from "@/components/card-categories";
 import { siteConfig } from "@/config/site";
-import TitleHeader from "../title-header";
 
 const allCategories = [
   {
@@ -68,8 +69,8 @@ export default function HomeContainer() {
         {allCategories.map((category) => (
           <CardCategories
             key={category.href}
-            href={category.href}
             description={category.description}
+            href={category.href}
             isActive={category.isActive}
             isDemo={category.isDemo}
           >

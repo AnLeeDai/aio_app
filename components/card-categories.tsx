@@ -43,7 +43,7 @@ export default function CardCategories({
 
       <CardFooter>
         <div className="flex flex-col items-center justify-center gap-2 text-center">
-          <Image src={cover} alt="Placeholder Image" />
+          <Image alt="Placeholder Image" src={cover} />
           <p
             className={
               state === "coming" ? "text-default-500" : "text-default-600"
@@ -58,7 +58,7 @@ export default function CardCategories({
 
   if (state === "active" || state === "demo") {
     return (
-      <Link href={href} aria-label={`${children} ${state}`}>
+      <Link aria-label={`${children} ${state}`} href={href}>
         <Card isPressable shadow="lg">
           {CardInner}
         </Card>
@@ -67,7 +67,7 @@ export default function CardCategories({
   }
 
   return (
-    <Card shadow="lg" aria-disabled>
+    <Card aria-disabled shadow="lg">
       {CardInner}
     </Card>
   );

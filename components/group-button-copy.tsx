@@ -32,15 +32,15 @@ export default function GroupButtonCopy({
   return (
     <ScrollShadow
       hideScrollBar
-      orientation="horizontal"
       className="flex items-center justify-end w-full bg-background/70 backdrop-blur-sm py-2"
+      orientation="horizontal"
     >
       <div className="flex gap-2 items-center">
         <Button
           color="default"
+          isDisabled={selectedCount === 0}
           startContent={<IconClipboardListFilled size={22} />}
           onPress={onCopySelected}
-          isDisabled={selectedCount === 0}
         >
           Copy&nbsp;{selectedCount}&nbsp;Selected
         </Button>

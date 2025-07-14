@@ -5,7 +5,7 @@ export function useCopyToClipboard(
   items: string[],
   selectedKeys: Set<string>,
   setSelectedKeys: (value: Set<string>) => void,
-  itemLabel = "item"
+  itemLabel = "item",
 ) {
   const copy = useCallback(
     (list: string[]) => {
@@ -18,27 +18,29 @@ export function useCopyToClipboard(
             description: `Copied ${list.length} ${itemLabel}${
               list.length > 1 ? "s" : ""
             }.`,
-          })
+          }),
         )
         .catch(() =>
           addToast({
             color: "warning",
             title: "Copy failed",
             description: "Your browser blocked clipboard access.",
-          })
+          }),
         );
     },
-    [itemLabel]
+    [itemLabel],
   );
 
   const copySelected = useCallback(() => {
     const list = items.filter((n) => selectedKeys.has(n));
+
     if (list.length === 0) {
       addToast({
         color: "warning",
         title: "Nothing selected",
         description: `Please choose at least one ${itemLabel}.`,
       });
+
       return;
     }
     copy(list);
@@ -51,6 +53,7 @@ export function useCopyToClipboard(
         title: "Empty list",
         description: `There is no ${itemLabel} to copy.`,
       });
+
       return;
     }
     copy(items);

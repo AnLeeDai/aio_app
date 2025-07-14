@@ -7,7 +7,7 @@ export default function GenerateWrapper(props: GenerateWrapperProps) {
 
   return (
     <div>
-      <div className="flex flex-col gap-4 max-w-xs"></div>
+      <div className="flex flex-col gap-4 max-w-xs" />
       {children}
     </div>
   );
