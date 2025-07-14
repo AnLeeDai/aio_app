@@ -43,3 +43,16 @@ export const passportGenerate = async (payload: {
 
   return data;
 };
+
+export const passportExpireDateGenerate = async (payload: {
+  date_number: number;
+  country: string;
+  format: string;
+}) => {
+  const { data } = await axiosInstance.post(
+    "/api/passports/generate/date",
+    payload
+  );
+
+  return data;
+};

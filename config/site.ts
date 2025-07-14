@@ -10,7 +10,7 @@ export const siteConfig = {
     passwordGenerate: "/password-generate",
     dobGenerate: "/dob-generate",
     passportGenerate: "/passport-generate",
-    passportExpireGenerate: "/passport-expire-generate",
+    passportExpireGenerate: "/passport-expire-date-generate",
     ibanGenerate: "/iban-generate",
     locationGenerate: "/location-generate",
   },
