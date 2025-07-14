@@ -29,7 +29,7 @@ export const allCategories = [
     name: "Passport Generate",
     href: siteConfig.routes.passportGenerate,
     description: "Generate passport id numbers",
-    isActive: false,
+    isActive: true,
     isDemo: false,
     cover: "/imgs/passport_generate_cover.png",
   },

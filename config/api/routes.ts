@@ -33,3 +33,13 @@ export const dobGenerate = async (payload: {
 
   return data;
 };
+
+export const passportGenerate = async (payload: {
+  id_number: number;
+  country: string;
+  prefix: string;
+}) => {
+  const { data } = await axiosInstance.post("/api/passports/generate", payload);
+
+  return data;
+};

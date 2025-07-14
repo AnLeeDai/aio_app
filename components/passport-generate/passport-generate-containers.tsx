@@ -5,34 +5,34 @@ import { useState } from "react";
 
 import TitleHeader from "../title-header";
 
-import PasswordGenerateConfig from "./password-generate-config";
-import PasswordGenerateResult from "./password-generate-result";
+import PassportGenerateConfig from "./passport-generate-config";
+import PassportGenerateResult from "./passport-generate-result";
 
-import { usePasswordGenerate } from "@/hooks/use-password-generate";
+import { usePassportGenerate } from "@/hooks/use-passport-generate";
 
-export default function PasswordGenerateContainers() {
+export default function PassportGenerateContainers() {
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
-  const [password, setPassword] = useState<string[]>([]);
+  const [passport, setPassport] = useState<string[]>([]);
 
-  const { mutate, isPending } = usePasswordGenerate({
+  const { mutate, isPending } = usePassportGenerate({
     onSuccess: (data) => {
       addToast({
         title: "Success",
         description: data.message,
         color: "success",
       });
-      setPassword(data.data);
+      setPassport(data.data);
       setSelectedKeys(new Set());
     },
 
     onError: (error) => {
-      console.error("Error generating password:", error);
+      console.error("Error generating passport:", error);
     },
   });
 
   return (
     <section>
-      <TitleHeader title="Password Generate" />
+      <TitleHeader title="Passport Generate" />
 
       <div
         className="
@@ -41,10 +41,10 @@ export default function PasswordGenerateContainers() {
                 lg:grid-cols-[320px_1fr]
               "
       >
-        <PasswordGenerateConfig isLoading={isPending} onGenerate={mutate} />
+        <PassportGenerateConfig isLoading={isPending} onGenerate={mutate} />
 
-        <PasswordGenerateResult
-          data={password}
+        <PassportGenerateResult
+          data={passport}
           selectedKeys={selectedKeys}
           setSelectedKeys={setSelectedKeys}
         />
