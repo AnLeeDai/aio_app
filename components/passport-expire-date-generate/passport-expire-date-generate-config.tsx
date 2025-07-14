@@ -33,11 +33,7 @@ export default function PassportExpireDateConfig({
   onGenerate,
   isLoading,
 }: PassportExpireDateConfigProps) {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<PassportExpireDateForm>({
+  const { control, handleSubmit } = useForm<PassportExpireDateForm>({
     defaultValues: {
       date_number: 10,
       country: "BR",
@@ -61,32 +57,31 @@ export default function PassportExpireDateConfig({
         <div className="flex flex-col gap-4">
           {/* ---------- date_number ---------- */}
           <Controller
-            name="date_number"
             control={control}
+            name="date_number"
+            render={({ field, fieldState }) => (
+              <Input
+                {...field}
+                errorMessage={fieldState.error?.message}
+                isInvalid={!!fieldState.error}
+                label="Number of dates"
+                placeholder="e.g. 100"
+                type="number"
+                value={field.value !== undefined ? String(field.value) : ""}
+                onChange={(e) => field.onChange(+e.target.value)}
+              />
+            )}
             rules={{
               required: "Required",
               min: { value: 1, message: "Min 1" },
               max: { value: 100, message: "Max 100" },
             }}
-            render={({ field, fieldState }) => (
-              <Input
-                {...field}
-                type="number"
-                label="Number of dates"
-                placeholder="e.g. 100"
-                value={field.value !== undefined ? String(field.value) : ""}
-                onChange={(e) => field.onChange(+e.target.value)}
-                isInvalid={!!fieldState.error}
-                errorMessage={fieldState.error?.message}
-              />
-            )}
           />
 
           {/* ---------- country ---------- */}
           <Controller
-            name="country"
             control={control}
-            rules={{ required: "Required" }}
+            name="country"
             render={({ field }) => (
               <Select
                 label="Country"
@@ -100,24 +95,20 @@ export default function PassportExpireDateConfig({
                 ))}
               </Select>
             )}
+            rules={{ required: "Required" }}
           />
 
           {/* ---------- format ---------- */}
           <Controller
-            name="format"
             control={control}
-            rules={{
-              validate: (v) =>
-                DATE_FORMAT_OPTIONS.some((opt) => opt.key === v) ||
-                "Invalid format",
-            }}
+            name="format"
             render={({ field }) => (
               <Select
                 label="Date format"
                 selectedKeys={[field.value]}
                 onSelectionChange={(keys) =>
                   field.onChange(
-                    Array.from(keys)[0] as PassportExpireDateForm["format"]
+                    Array.from(keys)[0] as PassportExpireDateForm["format"],
                   )
                 }
               >
@@ -126,16 +117,21 @@ export default function PassportExpireDateConfig({
                 ))}
               </Select>
             )}
+            rules={{
+              validate: (v) =>
+                DATE_FORMAT_OPTIONS.some((opt) => opt.key === v) ||
+                "Invalid format",
+            }}
           />
 
           {/* ---------- submit ---------- */}
           <Button
-            type="submit"
             className="w-full"
             color="primary"
+            isLoading={isLoading}
             size="lg"
             startContent={<IconDice6Filled size={22} />}
-            isLoading={isLoading}
+            type="submit"
           >
             Generate Expire Dates
           </Button>

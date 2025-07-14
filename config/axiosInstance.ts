@@ -1,8 +1,8 @@
 import axios from "axios";
 import { addToast } from "@heroui/react";
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000/";
-// const baseURL = "http://127.0.0.1:8000";
+// const baseURL = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000/";
+const baseURL = "http://127.0.0.1:8000";
 
 export const axiosInstance = axios.create({
   baseURL,
@@ -42,5 +42,5 @@ axiosInstance.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );

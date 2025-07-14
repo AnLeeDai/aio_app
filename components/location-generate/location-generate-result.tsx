@@ -13,27 +13,27 @@ import GroupButtonCopy from "../group-button-copy";
 
 import { useCopyToClipboard, CopyItem } from "@/hooks/use-copy-to-clipboard";
 
-interface IBANGenerateResultProps {
+interface LocationGenerateResultProps {
   data: string[];
   selectedKeys: Set<string>;
   setSelectedKeys: (keys: Set<string>) => void;
 }
 
-export default function IBANGenerateResult({
+export default function LocationGenerateResult({
   data,
   selectedKeys,
   setSelectedKeys,
-}: IBANGenerateResultProps) {
-  const rows: CopyItem[] = data.map((iban, idx) => ({
+}: LocationGenerateResultProps) {
+  const rows: CopyItem[] = data.map((loc, idx) => ({
     id: `row-${idx}`,
-    label: iban,
+    label: loc,
   }));
 
-  const copyIBAN = useCopyToClipboard(
+  const copyLocation = useCopyToClipboard(
     rows,
     selectedKeys,
     setSelectedKeys,
-    "iban",
+    "location",
   );
 
   return (
@@ -42,9 +42,9 @@ export default function IBANGenerateResult({
         <GroupButtonCopy
           selectedCount={selectedKeys.size}
           totalCount={rows.length}
-          onCopyAll={copyIBAN.copyAll}
-          onCopySelected={copyIBAN.copySelected}
-          onResetSelection={copyIBAN.resetSelection}
+          onCopyAll={copyLocation.copyAll}
+          onCopySelected={copyLocation.copySelected}
+          onResetSelection={copyLocation.resetSelection}
         />
       </CardHeader>
 
@@ -52,7 +52,7 @@ export default function IBANGenerateResult({
 
       <CardBody>
         <Listbox
-          label="Generated IBANs"
+          label="Generated Locations"
           selectedKeys={selectedKeys}
           selectionMode="multiple"
           variant="flat"

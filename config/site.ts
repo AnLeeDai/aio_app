@@ -13,6 +13,7 @@ export const siteConfig = {
     passportExpireGenerate: "/passport-expire-date-generate",
     ibanGenerate: "/iban-generate",
     locationGenerate: "/location-generate",
+    hotmailGenerate: "/hotmail-generate",
   },
 
   links: {

@@ -4,7 +4,7 @@ export const allCategories = [
   {
     name: "Name Generate",
     href: siteConfig.routes.nameGenerate,
-    description: "Generate random names",
+    description: "Generate random names (v0.0.1)",
     isActive: true,
     isDemo: false,
     cover: "/imgs/name_generate_cover.png",
@@ -12,7 +12,7 @@ export const allCategories = [
   {
     name: "Password Generate",
     href: siteConfig.routes.passwordGenerate,
-    description: "Create secure passwords",
+    description: "Create secure passwords (v0.0.1)",
     isActive: true,
     isDemo: false,
     cover: "/imgs/password_generate_cover.png",
@@ -20,7 +20,7 @@ export const allCategories = [
   {
     name: "DOB Generate",
     href: siteConfig.routes.dobGenerate,
-    description: "Generate random dates of birth",
+    description: "Generate random dates of birth (v0.0.1)",
     isActive: true,
     isDemo: false,
     cover: "/imgs/dob_generate_cover.png",
@@ -28,7 +28,7 @@ export const allCategories = [
   {
     name: "Passport Generate",
     href: siteConfig.routes.passportGenerate,
-    description: "Generate passport id numbers",
+    description: "Generate passport id numbers (v0.0.1)",
     isActive: true,
     isDemo: false,
     cover: "/imgs/passport_generate_cover.png",
@@ -36,7 +36,7 @@ export const allCategories = [
   {
     name: "Passport Expire Generate",
     href: siteConfig.routes.passportExpireGenerate,
-    description: "Generate passport expiration dates",
+    description: "Generate passport expiration dates (v0.0.1)",
     isActive: true,
     isDemo: false,
     cover: "/imgs/passport_expire_generate_cover.png",
@@ -44,7 +44,7 @@ export const allCategories = [
   {
     name: "IBAN Generate",
     href: siteConfig.routes.ibanGenerate,
-    description: "Generate IBAN numbers",
+    description: "Generate IBAN numbers (v0.0.1)",
     isActive: true,
     isDemo: false,
     cover: "/imgs/iban_generate_cover.png",
@@ -52,9 +52,17 @@ export const allCategories = [
   {
     name: "Location Generate",
     href: siteConfig.routes.locationGenerate,
-    description: "Generate random locations",
-    isActive: false,
+    description: "Generate random locations (v0.0.0)",
+    isActive: true,
     isDemo: true,
     cover: "/imgs/locations_generate_cover.png",
+  },
+  {
+    name: "Hotmail Generate",
+    href: siteConfig.routes.hotmailGenerate,
+    description: "Generate random hotmail",
+    isActive: false,
+    isDemo: false,
+    // cover: "/imgs/locations_generate_cover.png",
   },
 ];
