@@ -26,7 +26,7 @@ export default function DOBGenerateContainers() {
     },
 
     onError: (error) => {
-      console.error("Error generating names:", error);
+      console.error("Error generating dob:", error);
     },
   });
 
