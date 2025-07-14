@@ -2,7 +2,6 @@ import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import clsx from "clsx";
-
 import { Providers } from "./providers";
 import { Analytics } from "@vercel/analytics/next";
 
