@@ -7,6 +7,7 @@ export const allCategories = [
     description: "Generate random names",
     isActive: true,
     isDemo: false,
+    cover: "/imgs/name_generate_cover.png",
   },
   {
     name: "Password Generate",
@@ -14,13 +15,15 @@ export const allCategories = [
     description: "Create secure passwords",
     isActive: true,
     isDemo: false,
+    cover: "/imgs/password_generate_cover.png",
   },
   {
     name: "DOB Generate",
     href: siteConfig.routes.dobGenerate,
     description: "Generate random dates of birth",
-    isActive: false,
+    isActive: true,
     isDemo: false,
+    cover: "/imgs/dob_generate_cover.png",
   },
   {
     name: "Passport Generate",
@@ -28,6 +31,7 @@ export const allCategories = [
     description: "Generate passport id numbers",
     isActive: false,
     isDemo: false,
+    cover: "/imgs/passport_generate_cover.png",
   },
   {
     name: "Passport Expire Generate",
@@ -35,6 +39,7 @@ export const allCategories = [
     description: "Generate passport expiration dates",
     isActive: false,
     isDemo: false,
+    cover: "/imgs/passport_expire_generate_cover.png",
   },
   {
     name: "Iban Generate",
@@ -42,6 +47,7 @@ export const allCategories = [
     description: "Generate IBAN numbers",
     isActive: false,
     isDemo: false,
+    cover: "/imgs/iban_generate_cover.png",
   },
   {
     name: "Location Generate",
@@ -49,5 +55,6 @@ export const allCategories = [
     description: "Generate random locations",
     isActive: false,
     isDemo: true,
+    cover: "/imgs/locations_generate_cover.png",
   },
 ];

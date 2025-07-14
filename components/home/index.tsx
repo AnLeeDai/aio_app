@@ -2,7 +2,7 @@ import TitleHeader from "../title-header";
 
 import { allCategories } from "./home-categories-data";
 
-import CardCategories from "@/components/card-categories";
+import HomeCardCategories from "@/components/home/home-card-categories";
 
 export default function HomeContainers() {
   return (
@@ -16,15 +16,16 @@ export default function HomeContainers() {
         "
       >
         {allCategories.map((category) => (
-          <CardCategories
+          <HomeCardCategories
             key={category.href}
+            cover={category.cover}
             description={category.description}
             href={category.href}
             isActive={category.isActive}
             isDemo={category.isDemo}
           >
             {category.name}
-          </CardCategories>
+          </HomeCardCategories>
         ))}
       </div>
     </section>

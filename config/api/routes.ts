@@ -22,3 +22,14 @@ export const passwordGenerate = async (payload: {
 
   return data;
 };
+
+export const dobGenerate = async (payload: {
+  dob_num: number;
+  min_age: number;
+  max_age: number;
+  date_format: string;
+}) => {
+  const { data } = await axiosInstance.post("/api/birthdays/generate", payload);
+
+  return data;
+};
