@@ -20,7 +20,7 @@ import {
   TRANS_ASCII_OPTIONS,
 } from "./name-generate-data";
 
-export interface NameGenForm {
+interface NameGenForm {
   name_number: number;
   name_format: "first_last" | "first_middle_last";
   country: string;
@@ -39,7 +39,6 @@ export default function NameGenerateConfig({
 }: NameGenerateConfigProps) {
   const {
     control,
-    register,
     handleSubmit,
     formState: { errors },
   } = useForm<NameGenForm>({
@@ -52,15 +51,12 @@ export default function NameGenerateConfig({
     },
   });
 
-  const handleGenerate = handleSubmit((values) => {
-    onGenerate({
-      ...values,
-      name_number: Number(values.name_number),
-    });
+  const submit = handleSubmit((values) => {
+    onGenerate({ ...values, name_number: Number(values.name_number) });
   });
 
   return (
-    <Card as="form" onSubmit={handleGenerate}>
+    <Card as="form" onSubmit={submit}>
       <CardHeader>
         <h2 className="text-lg font-semibold">
           Select options to generate random names.
@@ -71,23 +67,33 @@ export default function NameGenerateConfig({
 
       <CardBody>
         <div className="flex flex-col gap-4">
-          <Input
-            {...register("name_number", {
-              required: true,
-              min: 1,
-              max: 100,
-              valueAsNumber: true,
-            })}
-            errorMessage={errors.name_number && "1–100 only"}
-            isInvalid={!!errors.name_number}
-            label="Enter number of names to generate"
-            placeholder="e.g. 10"
-            type="number"
+          {/* -------- name_number -------- */}
+          <Controller
+            name="name_number"
+            control={control}
+            rules={{
+              required: "Required",
+              min: { value: 1, message: "Min 1" },
+              max: { value: 100, message: "Max 100" },
+            }}
+            render={({ field, fieldState }) => (
+              <Input
+                {...field}
+                type="number"
+                label="Number of names"
+                placeholder="e.g. 10"
+                value={field.value !== undefined ? String(field.value) : ""}
+                onChange={(e) => field.onChange(+e.target.value)}
+                isInvalid={!!fieldState.error}
+                errorMessage={fieldState.error?.message}
+              />
+            )}
           />
 
+          {/* -------- country (2-letter) -------- */}
           <Controller
-            control={control}
             name="country"
+            control={control}
             render={({ field }) => (
               <Select
                 label="Select a locale"
@@ -103,9 +109,10 @@ export default function NameGenerateConfig({
             )}
           />
 
+          {/* -------- name_format -------- */}
           <Controller
-            control={control}
             name="name_format"
+            control={control}
             render={({ field }) => (
               <Select
                 label="Select name format"
@@ -121,9 +128,10 @@ export default function NameGenerateConfig({
             )}
           />
 
+          {/* -------- gender (male|female|random) -------- */}
           <Controller
-            control={control}
             name="gender"
+            control={control}
             render={({ field }) => (
               <Select
                 label="Select gender"
@@ -139,9 +147,10 @@ export default function NameGenerateConfig({
             )}
           />
 
+          {/* -------- trans_ascii -------- */}
           <Controller
-            control={control}
             name="trans_ascii"
+            control={control}
             render={({ field }) => (
               <Select
                 label="Transliterate to ASCII"
@@ -157,13 +166,14 @@ export default function NameGenerateConfig({
             )}
           />
 
+          {/* -------- submit -------- */}
           <Button
+            type="submit"
             className="w-full"
             color="primary"
-            isLoading={isLoading}
             size="lg"
             startContent={<IconDice6Filled size={22} />}
-            type="submit"
+            isLoading={isLoading}
           >
             Generate Names
           </Button>
