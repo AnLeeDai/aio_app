@@ -2,7 +2,7 @@ import axios from "axios";
 import { addToast } from "@heroui/react";
 
 const baseURL =
-  process.env.NEXT_PUBLIC_API_KEY ?? "https://aio-app-services.onrender.com/";
+  process.env.NEXT_PUBLIC_API_KEY ?? "http://127.0.0.1:8000";
 // const baseURL = "http://127.0.0.1:8000";
 
 export const axiosInstance = axios.create({
