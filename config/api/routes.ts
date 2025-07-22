@@ -69,8 +69,6 @@ export const ibanGenerate = async (payload: {
 export const locationGenerate = async (payload: {
   limit: number;
   country: string;
-  state: string;
-  city: string;
   trans_ascii: boolean;
 }) => {
   const { data } = await axiosInstance.post("api/locations/generate", payload);

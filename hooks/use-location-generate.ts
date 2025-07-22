@@ -6,8 +6,6 @@ import { locationGenerate } from "@/config/api/routes";
 export interface LocationGenerateParams {
   limit: number;
   country: string;
-  state?: string;
-  city?: string;
   trans_ascii: boolean;
 }
 

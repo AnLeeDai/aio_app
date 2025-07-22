@@ -18,8 +18,6 @@ import { TRANS_ASCII_OPTIONS } from "./location-generate-data";
 export interface LocationGenForm {
   limit: number;
   country: string;
-  state: string;
-  city: string;
   trans_ascii: boolean;
 }
 
@@ -36,8 +34,6 @@ export default function LocationGenerateConfig({
     defaultValues: {
       limit: 10,
       country: "Brazil",
-      state: "São Paulo",
-      city: "",
       trans_ascii: false,
     },
   });
@@ -90,47 +86,11 @@ export default function LocationGenerateConfig({
                 isInvalid={!!fieldState.error}
                 label="Country"
                 placeholder="e.g. Brazil"
+                disabled
               />
             )}
             rules={{
               required: "Required",
-              maxLength: { value: 100, message: "Max 100 characters" },
-            }}
-          />
-
-          {/* ---------- state (required) ---------- */}
-          <Controller
-            control={control}
-            name="state"
-            render={({ field, fieldState }) => (
-              <Input
-                {...field}
-                errorMessage={fieldState.error?.message}
-                isInvalid={!!fieldState.error}
-                label="State"
-                placeholder="e.g. São Paulo"
-              />
-            )}
-            rules={{
-              required: "Required",
-              maxLength: { value: 100, message: "Max 100 characters" },
-            }}
-          />
-
-          {/* ---------- city (optional) ---------- */}
-          <Controller
-            control={control}
-            name="city"
-            render={({ field, fieldState }) => (
-              <Input
-                {...field}
-                errorMessage={fieldState.error?.message}
-                isInvalid={!!fieldState.error}
-                label="City (optional)"
-                placeholder="e.g. Campinas"
-              />
-            )}
-            rules={{
               maxLength: { value: 100, message: "Max 100 characters" },
             }}
           />
