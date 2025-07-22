@@ -52,9 +52,9 @@ export const allCategories = [
   {
     name: "Location Generate",
     href: siteConfig.routes.locationGenerate,
-    description: "Generate random locations (v0.0.0)",
+    description: "Generate random locations (v0.0.1)",
     isActive: true,
-    isDemo: true,
+    isDemo: false,
     cover: "/imgs/locations_generate_cover.png",
   },
   {
