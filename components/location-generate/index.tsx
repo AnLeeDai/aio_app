@@ -38,7 +38,7 @@ export default function LocationGenerateContainers() {
 
   return (
     <section>
-      <div className="flex items-center justify-center w-full">
+      {/* <div className="flex items-center justify-center w-full">
         <Chip
           className="mb-4"
           color="warning"
@@ -50,7 +50,7 @@ export default function LocationGenerateContainers() {
           might be inaccurate and fetching can take longer than usual. Please
           keep this in mind.
         </Chip>
-      </div>
+      </div> */}
 
       <TitleHeader title="Location Generate" />
       <div
