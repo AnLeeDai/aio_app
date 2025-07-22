@@ -37,7 +37,7 @@ axiosInstance.interceptors.response.use(
     } else {
       addToast({
         title: "Error",
-        description: "An unexpected error occurred.",
+        description: error,
         color: "danger",
       });
     }
