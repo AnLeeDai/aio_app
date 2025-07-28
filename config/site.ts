@@ -11,6 +11,7 @@ export const siteConfig = {
     dobGenerate: "/dob-generate",
     passportGenerate: "/passport-generate",
     passportExpireGenerate: "/passport-expire-date-generate",
+    passportmrzGenerate: "/passport-mrz",
     ibanGenerate: "/iban-generate",
     locationGenerate: "/location-generate",
     hotmailGenerate: "/hotmail-generate",

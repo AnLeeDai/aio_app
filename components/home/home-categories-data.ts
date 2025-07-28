@@ -42,6 +42,14 @@ export const allCategories = [
     cover: "/imgs/passport_expire_generate_cover.png",
   },
   {
+    name: "Passport MRZ Generate",
+    href: siteConfig.routes.passportmrzGenerate,
+    description: "Generate passport mrz (v0.0.0)",
+    isActive: true,
+    isDemo: true,
+    // cover: "/imgs/locations_generate_cover.png",
+  },
+  {
     name: "IBAN Generate",
     href: siteConfig.routes.ibanGenerate,
     description: "Generate IBAN numbers (v0.0.1)",
@@ -56,13 +64,5 @@ export const allCategories = [
     isActive: true,
     isDemo: false,
     cover: "/imgs/locations_generate_cover.png",
-  },
-  {
-    name: "Hotmail Generate",
-    href: siteConfig.routes.hotmailGenerate,
-    description: "Generate random hotmail",
-    isActive: false,
-    isDemo: false,
-    // cover: "/imgs/locations_generate_cover.png",
   },
 ];

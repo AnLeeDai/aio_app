@@ -27,10 +27,9 @@ export interface MRZGeneratedRow {
   mrz: string[];
 }
 
-export interface PassportMRZGResponse {
-  message: string;
-  data: MRZGeneratedRow[];
-}
+export type PassportMRZGResponse =
+  | MRZGeneratedRow[]
+  | { message?: string; mrz: MRZGeneratedRow[] };
 
 type ResponseErr = {
   status: "error";

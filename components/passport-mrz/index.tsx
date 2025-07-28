@@ -7,7 +7,11 @@ import { Button } from "@heroui/react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
-import { usePassportMRZGenerate } from "@/hooks/use-passport-mrz-generate";
+import {
+  MRZGeneratedRow,
+  PassportMRZGResponse,
+  usePassportMRZGenerate,
+} from "@/hooks/use-passport-mrz-generate";
 
 dayjs.extend(customParseFormat);
 registerAllModules();
@@ -30,6 +34,9 @@ function isFilledRow(row: any) {
   return Object.entries(row).some(
     ([k, v]) => !ignore.has(k) && String(v ?? "").trim() !== "",
   );
+}
+function unwrap(res: PassportMRZGResponse): MRZGeneratedRow[] {
+  return Array.isArray(res) ? res : res.mrz;
 }
 
 const baseColumns = [
@@ -74,19 +81,24 @@ export default function PassportMRZContainer() {
   const [cols] = useState(baseColumns);
 
   const { mutate, isPending } = usePassportMRZGenerate({
-    onSuccess: (response) => {
-      const generatedRows = response.data;
+    onSuccess: (res) => {
+      const rows = unwrap(res);
 
-      setData((old) =>
-        old.map((r) => {
-          const found = generatedRows.find(
-            (x) => x.input.passport_num === r.passport_num,
-          );
+      setData((prev) => {
+        const next = [...prev];
 
-          return found ? { ...r, mrz: found.mrz.join("\n") } : r;
-        }),
-      );
+        rows.forEach((row, idx) => {
+          const mrzText = row.mrz.join("\n");
+
+          if (next[idx]) next[idx].mrz = mrzText;
+          else next.push({ ...row.input, mrz: mrzText });
+        });
+
+        return next;
+      });
     },
+
+    onError: () => {},
   });
 
   return (
@@ -100,7 +112,7 @@ export default function PassportMRZContainer() {
         onPress={() => {
           const rowsToSend = data.filter(isFilledRow);
 
-          if (rowsToSend.length) mutate(rowsToSend);
+          if (rowsToSend.length) mutate(rowsToSend as any);
         }}
       >
         {isPending ? "Generating…" : "Submit"}
@@ -120,7 +132,7 @@ export default function PassportMRZContainer() {
                 copy[row].given_names = given;
                 copy[row].surname = surname;
               } else {
-                (copy[row] as any)[prop] = newVal;
+                (copy[row] as any)[prop as string] = newVal;
               }
               if (prop !== "mrz") copy[row].mrz = "";
             });
