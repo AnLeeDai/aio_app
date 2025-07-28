@@ -60,7 +60,7 @@ const baseColumns = [
   },
   { data: "passport_num", title: "Passport Number" },
   { data: "nationality", title: "Nationality" },
-  { data: "mrz", title: "MRZ", readOnly: true },
+  { data: "mrz", title: "MRZ" },
 ];
 
 /* ---------- component ---------- */
