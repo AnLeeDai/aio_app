@@ -16,7 +16,7 @@ export function useCopyToClipboard(
   itemLabel = "item",
 ) {
   const items: CopyItem[] = (() => {
-    const seen = new Map<string, number>(); // chống trùng key khi dùng string[]
+    const seen = new Map<string, number>();
 
     return rawItems.map((it, idx) => {
       if (typeof it === "string") {
@@ -24,7 +24,7 @@ export function useCopyToClipboard(
         const dup = seen.get(base) ?? 0;
 
         seen.set(base, dup + 1);
-        const id = dup === 0 ? base : `${base}-${idx}`; // đảm bảo unique
+        const id = dup === 0 ? base : `${base}-${idx}`;
 
         return { id, label: it };
       }
@@ -33,11 +33,10 @@ export function useCopyToClipboard(
     });
   })();
 
-  /* Thao tác copy thuần --------------------------------------- */
   const copyRaw = useCallback(
     (list: string[]) =>
       navigator.clipboard
-        .writeText(list.join("\n")) // newline = dòng mới (Google Sheets hiểu)
+        .writeText(list.join("\n"))
         .then(() =>
           addToast({
             color: "success",

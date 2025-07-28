@@ -34,14 +34,14 @@ export function Providers({ children, themeProps }: ProvidersProps) {
         defaultOptions: {
           queries: {
             retry: 1,
-            staleTime: 1000 * 60, // 1 phút
+            staleTime: 1000 * 60,
             refetchOnWindowFocus: false,
           },
           mutations: {
             retry: 0,
           },
         },
-      })
+      }),
   );
 
   return (

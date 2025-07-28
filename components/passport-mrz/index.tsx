@@ -4,35 +4,35 @@ import { HotTable } from "@handsontable/react";
 import { registerAllModules } from "handsontable/registry";
 import { useState } from "react";
 import { Button } from "@heroui/react";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
+import { usePassportMRZGenerate } from "@/hooks/use-passport-mrz-generate";
+
+dayjs.extend(customParseFormat);
 registerAllModules();
 
-// Hàm tách tên → { given, surname }
+/* ---------- helpers ---------- */
 function splitName(full: string) {
-  const parts = full.trim().split(/\s+/); // dùng split + regex :contentReference[oaicite:0]{index=0}
-  const surname = parts.pop() ?? ""; // lấy từ cuối cùng :contentReference[oaicite:1]{index=1}
-  const given = parts.join(" "); // ghép phần còn lại
+  const parts = full.trim().split(/\s+/);
 
-  return { given, surname };
+  return { surname: parts.pop() ?? "", given: parts.join(" ") };
+}
+function normalizeDate(str: string) {
+  const formats = ["DD/MM/YYYY", "MM/DD/YYYY", "YYYY-MM-DD", "DD-MM-YYYY"];
+  const parsed = dayjs(str.trim(), formats, true);
+
+  return parsed.isValid() ? parsed.format("YYYY-MM-DD") : str;
+}
+function isFilledRow(row: any) {
+  const ignore = new Set(["mrz", "issuer", "nationality"]);
+
+  return Object.entries(row).some(
+    ([k, v]) => !ignore.has(k) && String(v ?? "").trim() !== "",
+  );
 }
 
-const defaultData = [
-  {
-    subtype: "",
-    given_names: "",
-    surname: "",
-    dob: "",
-    sex: "",
-    issuer: "",
-    expiry: "",
-    passport_num: "",
-    personal_num: "",
-    nationality: "BRA",
-  },
-];
-
-const columns = [
-  { data: "subtype", title: "Subtype" },
+const baseColumns = [
   { data: "given_names", title: "Given Names" },
   { data: "surname", title: "Surname" },
   {
@@ -40,17 +40,54 @@ const columns = [
     title: "Date of Birth",
     type: "date",
     dateFormat: "YYYY-MM-DD",
+    correctFormat: true,
   },
   { data: "sex", title: "Sex", type: "dropdown", source: ["M", "F"] },
   { data: "issuer", title: "Issuer" },
-  { data: "expiry", title: "Expiry", type: "date", dateFormat: "YYYY-MM-DD" },
+  {
+    data: "expiry",
+    title: "Expiry",
+    type: "date",
+    dateFormat: "YYYY-MM-DD",
+    correctFormat: true,
+  },
   { data: "passport_num", title: "Passport Number" },
-  { data: "personal_num", title: "Personal Number" },
   { data: "nationality", title: "Nationality" },
+  { data: "mrz", title: "MRZ", readOnly: true },
 ];
 
+/* ---------- component ---------- */
 export default function PassportMRZContainer() {
-  const [data, setData] = useState(defaultData);
+  const [data, setData] = useState([
+    {
+      given_names: "",
+      surname: "",
+      dob: "",
+      sex: "",
+      issuer: "BRA",
+      expiry: "",
+      passport_num: "",
+      nationality: "BRA",
+      mrz: "",
+    },
+  ]);
+  const [cols] = useState(baseColumns);
+
+  const { mutate, isPending } = usePassportMRZGenerate({
+    onSuccess: (response) => {
+      const generatedRows = response.data;
+
+      setData((old) =>
+        old.map((r) => {
+          const found = generatedRows.find(
+            (x) => x.input.passport_num === r.passport_num,
+          );
+
+          return found ? { ...r, mrz: found.mrz.join("\n") } : r;
+        }),
+      );
+    },
+  });
 
   return (
     <div className="p-4 space-y-4">
@@ -58,42 +95,55 @@ export default function PassportMRZContainer() {
 
       <Button
         fullWidth
+        disabled={isPending}
         variant="solid"
-        onClick={() => {
-          console.log("Submitted data:", data);
+        onPress={() => {
+          const rowsToSend = data.filter(isFilledRow);
+
+          if (rowsToSend.length) mutate(rowsToSend);
         }}
       >
-        Submit
+        {isPending ? "Generating…" : "Submit"}
       </Button>
 
       <HotTable
         rowHeaders
         afterChange={(changes, source) => {
           if (source === "loadData" || !changes) return;
-
-          setData((old) => {
-            const updated = [...old];
+          setData((prev) => {
+            const copy = [...prev];
 
             changes.forEach(([row, prop, , newVal]) => {
-              // Nếu cột vừa sửa là given_names
-              if (prop === "given_names" && typeof newVal === "string") {
-                const { given, surname } = splitName(newVal);
+              if (prop === "given_names") {
+                const { given, surname } = splitName(String(newVal));
 
-                updated[row].given_names = given;
-                updated[row].surname = surname;
+                copy[row].given_names = given;
+                copy[row].surname = surname;
               } else {
-                // xử lý cập nhật bình thường
-                updated[row][prop as keyof (typeof updated)[number]] = newVal;
+                (copy[row] as any)[prop] = newVal;
               }
+              if (prop !== "mrz") copy[row].mrz = "";
             });
 
-            return updated;
+            return copy;
           });
         }}
-        colHeaders={columns.map((c) => c.title)}
-        columns={columns}
+        beforePaste={(data, coords) => {
+          data.forEach((row) => {
+            row.forEach((val, i) => {
+              const colIndex = coords[0].startCol + i;
+              const colDef = cols[colIndex];
+
+              if (colDef?.type === "date") row[i] = normalizeDate(String(val));
+            });
+          });
+        }}
+        colHeaders={cols.map((c) => c.title)}
+        columns={cols}
+        copyPaste={true}
         data={data}
         licenseKey="non-commercial-and-evaluation"
+        minSpareRows={1}
         stretchH="all"
         width="100%"
       />

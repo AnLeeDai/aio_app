@@ -75,3 +75,21 @@ export const locationGenerate = async (payload: {
 
   return data;
 };
+
+export const passportMRZGenerate = async (payload: {
+  given_names: string;
+  surname: string;
+  dob: string;
+  sex: string;
+  issuer: string;
+  expiry: string;
+  passport_num: string;
+  nationality: string;
+}) => {
+  const { data } = await axiosInstance.post(
+    "api/passport/generate/mrz",
+    payload,
+  );
+
+  return data;
+};

@@ -31,6 +31,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "axios": "^1.10.0",
     "clsx": "2.1.1",
+    "dayjs": "^1.11.13",
     "framer-motion": "11.13.1",
     "handsontable": "^16.0.1",
     "intl-messageformat": "10.7.16",

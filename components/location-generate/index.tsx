@@ -25,13 +25,9 @@ export default function LocationGenerateContainers() {
         color: "success",
       });
       setLocations(
-        data.data.map((location: LocationRecord) => location.address)
+        data.data.map((location: LocationRecord) => location.address),
       );
       setSelectedKeys(new Set());
-    },
-
-    onError: (error) => {
-      console.error("Error generating location:", error);
     },
   });
 

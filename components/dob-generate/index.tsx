@@ -24,10 +24,6 @@ export default function DOBGenerateContainers() {
       setDOB(data.data);
       setSelectedKeys(new Set());
     },
-
-    onError: (error) => {
-      console.error("Error generating dob:", error);
-    },
   });
 
   return (
