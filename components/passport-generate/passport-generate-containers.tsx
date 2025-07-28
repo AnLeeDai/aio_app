@@ -24,10 +24,6 @@ export default function PassportGenerateContainers() {
       setPassport(data.data);
       setSelectedKeys(new Set());
     },
-
-    onError: (error) => {
-      console.error("Error generating passport:", error);
-    },
   });
 
   return (

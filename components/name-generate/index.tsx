@@ -24,10 +24,6 @@ export default function NameGenerateContainer() {
       setNames(data.data);
       setSelectedKeys(new Set());
     },
-
-    onError: (error) => {
-      console.error("Error generating names:", error);
-    },
   });
 
   return (

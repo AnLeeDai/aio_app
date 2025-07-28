@@ -24,10 +24,6 @@ export default function PasswordGenerateContainers() {
       setPassword(data.data);
       setSelectedKeys(new Set());
     },
-
-    onError: (error) => {
-      console.error("Error generating password:", error);
-    },
   });
 
   return (

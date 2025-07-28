@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { addToast, Chip } from "@heroui/react";
-import { IconAlertTriangleFilled } from "@tabler/icons-react";
+import { addToast } from "@heroui/react";
 
 import TitleHeader from "../title-header";
 
@@ -29,10 +28,6 @@ export default function LocationGenerateContainers() {
         data.data.map((location: LocationRecord) => location.address),
       );
       setSelectedKeys(new Set());
-    },
-
-    onError: (error) => {
-      console.error("Error generating location:", error);
     },
   });
 

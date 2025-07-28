@@ -82,11 +82,11 @@ export default function LocationGenerateConfig({
             render={({ field, fieldState }) => (
               <Input
                 {...field}
+                disabled
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
                 label="Country"
                 placeholder="e.g. Brazil"
-                disabled
               />
             )}
             rules={{

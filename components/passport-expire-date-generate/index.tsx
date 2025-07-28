@@ -24,10 +24,6 @@ export default function PassportExpireDateGenerateContainers() {
       setPassportExpire(data.data);
       setSelectedKeys(new Set());
     },
-
-    onError: (error) => {
-      console.error("Error generating passport expire:", error);
-    },
   });
 
   return (

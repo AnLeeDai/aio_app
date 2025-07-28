@@ -24,10 +24,6 @@ export default function IBANGenerateContainers() {
       setIBAN(data.data);
       setSelectedKeys(new Set());
     },
-
-    onError: (error) => {
-      console.error("Error generating password:", error);
-    },
   });
 
   return (
