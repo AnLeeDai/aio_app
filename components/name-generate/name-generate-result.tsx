@@ -61,8 +61,8 @@ export default function NameGenerateResult({
             )
           }
         >
-          {(data || []).map((name) => (
-            <ListboxItem key={name}>{name}</ListboxItem>
+          {(data || []).map((name, idx) => (
+            <ListboxItem key={name + "-" + idx}>{name}</ListboxItem>
           ))}
         </Listbox>
       </CardBody>

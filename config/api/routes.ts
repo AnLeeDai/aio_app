@@ -93,3 +93,21 @@ export const passportMRZGenerate = async (payload: {
 
   return data;
 };
+
+export const pactualBillGenerate = async (
+  payload: Array<{
+    filename: string;
+    fullname: string;
+    addressOne: string;
+    addressTwo: string;
+    accountNumber: string;
+    totalOn: number;
+  }>,
+) => {
+  const { data } = await axiosInstance.post(
+    "/api/pactual-bill/generate",
+    payload,
+  );
+
+  return data;
+};
