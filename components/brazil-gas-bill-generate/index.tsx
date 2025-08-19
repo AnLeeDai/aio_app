@@ -14,17 +14,6 @@ import { useBrazilGasBillGenerate } from "@/hooks/use-brazil-gas-bill-generate";
 
 Handsontable.cellTypes.registerCellType(NumericCellType);
 
-const columns = [
-  { data: "filename", type: "text", title: "Filename" },
-  { data: "fullName", type: "text", title: "Full Name" },
-  { data: "fullAddress", type: "text", title: "Full Address" },
-  { data: "addressOne", type: "text", title: "Address One" },
-  { data: "addressTwo", type: "text", title: "Address Two" },
-  { data: "accountNum", type: "text", title: "Account Number" },
-];
-
-const colHeaders = columns.map((col) => col.title);
-
 export default function BrazilGasBillGenerateContainer() {
   const initialData: any[] = [];
   const [data, setData] = useState(initialData);
@@ -113,11 +102,6 @@ export default function BrazilGasBillGenerateContainer() {
     }
 
     mutate(filteredData);
-  };
-
-  const handleTableChange = (changes: any, _source: string) => {
-    if (!changes) return;
-    setData([...data]);
   };
 
   return (

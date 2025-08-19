@@ -14,16 +14,6 @@ import { useBanrisulBillGenerate } from "@/hooks/use-banrisul-bill-generate";
 
 Handsontable.cellTypes.registerCellType(NumericCellType);
 
-const columns = [
-  { data: "filename", type: "text", title: "Filename" },
-  { data: "fullname", type: "text", title: "Full Name" },
-  { data: "addressOne", type: "text", title: "Address One" },
-  { data: "addressTwo", type: "text", title: "Address Two" },
-  { data: "accountNumber", type: "text", title: "Account Number" },
-];
-
-const colHeaders = columns.map((col) => col.title);
-
 export default function BanrisulBankGenerateContainer() {
   const initialData: any[] = [];
   const [data, setData] = useState(initialData);
@@ -122,11 +112,6 @@ export default function BanrisulBankGenerateContainer() {
 
     // Gọi API qua hook
     mutate(formattedData);
-  };
-
-  const handleTableChange = (changes: any, _source: string) => {
-    if (!changes) return;
-    setData([...data]);
   };
 
   return (

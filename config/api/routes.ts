@@ -1,4 +1,4 @@
-import { axiosInstance } from "../axiosInstance";
+import { axiosAioApp, axiosTextGenerate } from "../axiosInstance";
 
 export const namesGenerate = async (payload: {
   name_number: number;
@@ -7,7 +7,7 @@ export const namesGenerate = async (payload: {
   gender: "male" | "female";
   trans_ascii: boolean;
 }) => {
-  const { data } = await axiosInstance.post("/api/names/generate", payload);
+  const { data } = await axiosAioApp.post("/api/names/generate", payload);
 
   return data;
 };
@@ -18,7 +18,7 @@ export const passwordGenerate = async (payload: {
   include_special_chars: boolean;
   is_uppercase: boolean;
 }) => {
-  const { data } = await axiosInstance.post("/api/passwords/generate", payload);
+  const { data } = await axiosAioApp.post("/api/passwords/generate", payload);
 
   return data;
 };
@@ -29,7 +29,7 @@ export const dobGenerate = async (payload: {
   max_age: number;
   date_format: string;
 }) => {
-  const { data } = await axiosInstance.post("/api/birthdays/generate", payload);
+  const { data } = await axiosAioApp.post("/api/birthdays/generate", payload);
 
   return data;
 };
@@ -39,7 +39,7 @@ export const passportGenerate = async (payload: {
   country: string;
   prefix: string;
 }) => {
-  const { data } = await axiosInstance.post("/api/passports/generate", payload);
+  const { data } = await axiosAioApp.post("/api/passports/generate", payload);
 
   return data;
 };
@@ -49,7 +49,7 @@ export const passportExpireDateGenerate = async (payload: {
   country: string;
   format: string;
 }) => {
-  const { data } = await axiosInstance.post(
+  const { data } = await axiosAioApp.post(
     "/api/passports/generate/date",
     payload,
   );
@@ -61,7 +61,7 @@ export const ibanGenerate = async (payload: {
   iban_number: number;
   country: string;
 }) => {
-  const { data } = await axiosInstance.post("/api/ibans/generate", payload);
+  const { data } = await axiosAioApp.post("/api/ibans/generate", payload);
 
   return data;
 };
@@ -71,7 +71,7 @@ export const locationGenerate = async (payload: {
   country: string;
   trans_ascii: boolean;
 }) => {
-  const { data } = await axiosInstance.post("api/locations/generate", payload);
+  const { data } = await axiosAioApp.post("api/locations/generate", payload);
 
   return data;
 };
@@ -86,10 +86,7 @@ export const passportMRZGenerate = async (payload: {
   passport_num: string;
   nationality: string;
 }) => {
-  const { data } = await axiosInstance.post(
-    "api/passport/generate/mrz",
-    payload,
-  );
+  const { data } = await axiosAioApp.post("api/passport/generate/mrz", payload);
 
   return data;
 };
@@ -104,7 +101,7 @@ export const pactualBillGenerate = async (
     totalOn: number;
   }>,
 ) => {
-  const { data } = await axiosInstance.post(
+  const { data } = await axiosTextGenerate.post(
     "/api/pactual-bill/generate",
     payload,
   );
@@ -121,7 +118,7 @@ export const banrisulBillGenerate = async (
     accountNumber: string;
   }>,
 ) => {
-  const { data } = await axiosInstance.post(
+  const { data } = await axiosTextGenerate.post(
     "/api/banrisul-bill/generate",
     payload,
   );
@@ -139,7 +136,7 @@ export const brazilGasBillGenerate = async (
     addressTwo: string;
   }>,
 ) => {
-  const { data } = await axiosInstance.post(
+  const { data } = await axiosTextGenerate.post(
     "/api/brazil-gas-bill/generate",
     payload,
   );
