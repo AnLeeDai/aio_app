@@ -4,13 +4,27 @@ import { useState } from "react";
 import { Button } from "@heroui/button";
 import { useForm } from "react-hook-form";
 import { addToast } from "@heroui/react";
+import { HotTable } from "@handsontable/react";
+import Handsontable from "handsontable";
+import { NumericCellType } from "handsontable/cellTypes";
 
-import { HistoryPactualBankGenerate } from "./history-pactual-bank-generate";
-import { TablePactualBankGenerate } from "./table-pactual-bank-generate";
+import { HistoryBanrisulBankGenerate } from "./history-banrisul-bank-generate";
 
-import { usePactualBillGenerate } from "@/hooks/use-pactual-bill-generate";
+import { useBanrisulBillGenerate } from "@/hooks/use-banrisul-bill-generate";
 
-export default function PactutalBankGenerateContainer() {
+Handsontable.cellTypes.registerCellType(NumericCellType);
+
+const columns = [
+  { data: "filename", type: "text", title: "Filename" },
+  { data: "fullname", type: "text", title: "Full Name" },
+  { data: "addressOne", type: "text", title: "Address One" },
+  { data: "addressTwo", type: "text", title: "Address Two" },
+  { data: "accountNumber", type: "text", title: "Account Number" },
+];
+
+const colHeaders = columns.map((col) => col.title);
+
+export default function BanrisulBankGenerateContainer() {
   const initialData: any[] = [];
   const [data, setData] = useState(initialData);
   const [errors, setErrors] = useState<any[]>([]);
@@ -19,7 +33,7 @@ export default function PactutalBankGenerateContainer() {
   const { handleSubmit: rhfHandleSubmit } = useForm();
 
   // Sử dụng hook gọi API
-  const { mutate, isPending } = usePactualBillGenerate({
+  const { mutate, isPending } = useBanrisulBillGenerate({
     onSuccess: (result) => {
       setHistory((prev) => [
         {
@@ -53,12 +67,6 @@ export default function PactutalBankGenerateContainer() {
       if (!row.addressOne?.trim()) err.addressOne = "Required";
       if (!row.addressTwo?.trim()) err.addressTwo = "Required";
       if (!row.accountNumber?.trim()) err.accountNumber = "Required";
-      if (
-        row.totalOn === undefined ||
-        row.totalOn === null ||
-        isNaN(row.totalOn)
-      )
-        err.totalOn = "Required";
 
       return err;
     });
@@ -116,9 +124,14 @@ export default function PactutalBankGenerateContainer() {
     mutate(formattedData);
   };
 
+  const handleTableChange = (changes: any, _source: string) => {
+    if (!changes) return;
+    setData([...data]);
+  };
+
   return (
     <div className="p-4 space-y-4">
-      <h2 className="text-xl font-bold">Pactual Bank Generate</h2>
+      <h2 className="text-xl font-bold">Banrisul Bank Generate</h2>
 
       <div className="flex gap-3 mb-3">
         <Button
@@ -134,9 +147,30 @@ export default function PactutalBankGenerateContainer() {
         </Button>
       </div>
 
-      <TablePactualBankGenerate data={data} errors={errors} setData={setData} />
+      <div className="relative">
+        <HotTable
+          afterChange={handleTableChange}
+          cells={(row, col) => {
+            const cellProperties: any = {};
 
-      <HistoryPactualBankGenerate history={history} />
+            if (errors[row] && columns[col] && errors[row][columns[col].data]) {
+              cellProperties.className = "htInvalid";
+            }
+
+            return cellProperties;
+          }}
+          className="w-full"
+          colHeaders={colHeaders}
+          columns={columns}
+          data={data}
+          licenseKey="non-commercial-and-evaluation"
+          minSpareRows={3}
+          rowHeaders={true}
+          stretchH="all"
+        />
+      </div>
+
+      <HistoryBanrisulBankGenerate history={history} />
     </div>
   );
 }

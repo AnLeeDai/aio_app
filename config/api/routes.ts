@@ -111,3 +111,20 @@ export const pactualBillGenerate = async (
 
   return data;
 };
+
+export const banrisulBillGenerate = async (
+  payload: Array<{
+    filename: string;
+    fullname: string;
+    addressOne: string;
+    addressTwo: string;
+    accountNumber: string;
+  }>,
+) => {
+  const { data } = await axiosInstance.post(
+    "/api/banrisul-bill/generate",
+    payload,
+  );
+
+  return data;
+};

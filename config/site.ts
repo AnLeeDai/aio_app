@@ -16,6 +16,7 @@ export const siteConfig = {
     locationGenerate: "/location-generate",
     hotmailGenerate: "/hotmail-generate",
     pactualBankGenerate: "/pactual-bank-generate",
+    banrisulBankGenerate: "/banrisul-bank-generate",
   },
 
   links: {
