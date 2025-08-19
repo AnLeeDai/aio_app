@@ -65,4 +65,28 @@ export const allCategories = [
     isDemo: false,
     cover: "/imgs/locations_generate_cover.png",
   },
+  {
+    name: "Pactual Bank Generate",
+    href: siteConfig.routes.pactualBankGenerate,
+    description: "Generate Pactual Bank accounts (v0.0.1)",
+    isActive: true,
+    isDemo: true,
+    cover: "/imgs/pactual_bank_generate_cover.png",
+  },
+  {
+    name: "Banrisul Bank Generate",
+    href: siteConfig.routes.banrisulBankGenerate,
+    description: "Generate Banrisul Bank accounts (v0.0.1)",
+    isActive: true,
+    isDemo: true,
+    cover: "/imgs/banrisul_bank_generate_cover.png",
+  },
+  {
+    name: "Brazil Gas Bill Generate",
+    href: siteConfig.routes.brazilGasBillGenerate,
+    description: "Generate Brazil Gas Bill (v0.0.1)",
+    isActive: true,
+    isDemo: true,
+    cover: "/imgs/brazil_gas_bill_generate_cover.png",
+  },
 ];

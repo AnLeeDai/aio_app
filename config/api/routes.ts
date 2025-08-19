@@ -93,3 +93,56 @@ export const passportMRZGenerate = async (payload: {
 
   return data;
 };
+
+export const pactualBillGenerate = async (
+  payload: Array<{
+    filename: string;
+    fullname: string;
+    addressOne: string;
+    addressTwo: string;
+    accountNumber: string;
+    totalOn: number;
+  }>,
+) => {
+  const { data } = await axiosInstance.post(
+    "/api/pactual-bill/generate",
+    payload,
+  );
+
+  return data;
+};
+
+export const banrisulBillGenerate = async (
+  payload: Array<{
+    filename: string;
+    fullname: string;
+    addressOne: string;
+    addressTwo: string;
+    accountNumber: string;
+  }>,
+) => {
+  const { data } = await axiosInstance.post(
+    "/api/banrisul-bill/generate",
+    payload,
+  );
+
+  return data;
+};
+
+export const brazilGasBillGenerate = async (
+  payload: Array<{
+    filename: string;
+    fullName: string;
+    fullAddress: string;
+    accountNum: string;
+    addressOne: string;
+    addressTwo: string;
+  }>,
+) => {
+  const { data } = await axiosInstance.post(
+    "/api/brazil-gas-bill/generate",
+    payload,
+  );
+
+  return data;
+};

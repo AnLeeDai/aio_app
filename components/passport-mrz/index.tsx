@@ -63,21 +63,21 @@ const baseColumns = [
   { data: "mrz", title: "MRZ" },
 ];
 
+const initialRow = {
+  given_names: "",
+  surname: "",
+  dob: "",
+  sex: "",
+  issuer: "BRA",
+  expiry: "",
+  passport_num: "",
+  nationality: "BRA",
+  mrz: "",
+};
+
 /* ---------- component ---------- */
 export default function PassportMRZContainer() {
-  const [data, setData] = useState([
-    {
-      given_names: "",
-      surname: "",
-      dob: "",
-      sex: "",
-      issuer: "BRA",
-      expiry: "",
-      passport_num: "",
-      nationality: "BRA",
-      mrz: "",
-    },
-  ]);
+  const [data, setData] = useState([initialRow]);
   const [cols] = useState(baseColumns);
 
   const { mutate, isPending } = usePassportMRZGenerate({
@@ -105,18 +105,32 @@ export default function PassportMRZContainer() {
     <div className="p-4 space-y-4">
       <h2 className="text-xl font-bold">Passport MRZ Sheet</h2>
 
-      <Button
-        fullWidth
-        disabled={isPending}
-        variant="solid"
-        onPress={() => {
-          const rowsToSend = data.filter(isFilledRow);
+      <div className="flex gap-2">
+        <Button
+          fullWidth
+          color="primary"
+          disabled={isPending}
+          isLoading={isPending}
+          onPress={() => {
+            const rowsToSend = data.filter(isFilledRow);
 
-          if (rowsToSend.length) mutate(rowsToSend as any);
-        }}
-      >
-        {isPending ? "Generating…" : "Submit"}
-      </Button>
+            if (rowsToSend.length) mutate(rowsToSend as any);
+          }}
+        >
+          {isPending ? "Generating…" : "Submit"}
+        </Button>
+
+        <Button
+          fullWidth
+          color="secondary"
+          disabled={isPending}
+          onPress={() => {
+            setData([initialRow]);
+          }}
+        >
+          Reset
+        </Button>
+      </div>
 
       <HotTable
         rowHeaders
