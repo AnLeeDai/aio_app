@@ -128,3 +128,21 @@ export const banrisulBillGenerate = async (
 
   return data;
 };
+
+export const brazilGasBillGenerate = async (
+  payload: Array<{
+    filename: string;
+    fullName: string;
+    fullAddress: string;
+    accountNum: string;
+    addressOne: string;
+    addressTwo: string;
+  }>,
+) => {
+  const { data } = await axiosInstance.post(
+    "/api/brazil-gas-bill/generate",
+    payload,
+  );
+
+  return data;
+};

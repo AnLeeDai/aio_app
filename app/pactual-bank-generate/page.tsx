@@ -1,5 +1,5 @@
 import PactutalBankGenerateContainer from "@/components/pactual-bank-generate";
 
-export default function PactutalBankGenerate() {
+export default function PactutalBankGeneratePage() {
   return <PactutalBankGenerateContainer />;
 }

@@ -7,24 +7,25 @@ import { addToast } from "@heroui/react";
 import Handsontable from "handsontable";
 import { NumericCellType } from "handsontable/cellTypes";
 
-import { HistoryBanrisulBankGenerate } from "./history-banrisul-bank-generate";
-import { TableBanrisulBankGenerate } from "./table-banrisul-bank-generate";
+import { HistoryBanrisulBankGenerate } from "./history-brazil-gas-bill-generate";
+import { TableBrazilGasBillGenerate } from "./table-brazil-gas-bill-generate";
 
-import { useBanrisulBillGenerate } from "@/hooks/use-banrisul-bill-generate";
+import { useBrazilGasBillGenerate } from "@/hooks/use-brazil-gas-bill-generate";
 
 Handsontable.cellTypes.registerCellType(NumericCellType);
 
 const columns = [
   { data: "filename", type: "text", title: "Filename" },
-  { data: "fullname", type: "text", title: "Full Name" },
+  { data: "fullName", type: "text", title: "Full Name" },
+  { data: "fullAddress", type: "text", title: "Full Address" },
   { data: "addressOne", type: "text", title: "Address One" },
   { data: "addressTwo", type: "text", title: "Address Two" },
-  { data: "accountNumber", type: "text", title: "Account Number" },
+  { data: "accountNum", type: "text", title: "Account Number" },
 ];
 
 const colHeaders = columns.map((col) => col.title);
 
-export default function BanrisulBankGenerateContainer() {
+export default function BrazilGasBillGenerateContainer() {
   const initialData: any[] = [];
   const [data, setData] = useState(initialData);
   const [errors, setErrors] = useState<any[]>([]);
@@ -32,8 +33,8 @@ export default function BanrisulBankGenerateContainer() {
 
   const { handleSubmit: rhfHandleSubmit } = useForm();
 
-  // Sử dụng hook gọi API
-  const { mutate, isPending } = useBanrisulBillGenerate({
+  // Sử dụng hook gọi API mới
+  const { mutate, isPending } = useBrazilGasBillGenerate({
     onSuccess: (result) => {
       setHistory((prev) => [
         {
@@ -44,7 +45,6 @@ export default function BanrisulBankGenerateContainer() {
         },
         ...prev,
       ]);
-      // Hiển thị toast thành công
       addToast({
         color: "success",
         description: result.message,
@@ -58,15 +58,17 @@ export default function BanrisulBankGenerateContainer() {
     },
   });
 
+  // Validate đúng các trường của Brazil Gas Bill
   const validateRows = (rows: any[]) => {
     const rowErrors = rows.map((row) => {
       const err: any = {};
 
       if (!row.filename?.trim()) err.filename = "Required";
-      if (!row.fullname?.trim()) err.fullname = "Required";
+      if (!row.fullName?.trim()) err.fullName = "Required";
+      if (!row.fullAddress?.trim()) err.fullAddress = "Required";
       if (!row.addressOne?.trim()) err.addressOne = "Required";
       if (!row.addressTwo?.trim()) err.addressTwo = "Required";
-      if (!row.accountNumber?.trim()) err.accountNumber = "Required";
+      if (!row.accountNum?.trim()) err.accountNum = "Required";
 
       return err;
     });
@@ -83,11 +85,10 @@ export default function BanrisulBankGenerateContainer() {
       (row) =>
         row &&
         (row.filename?.trim() ||
-          row.fullname?.trim() ||
-          row.accountNumber?.trim()),
+          row.fullName?.trim() ||
+          row.accountNum?.trim()),
     );
 
-    // Nếu không có dòng nào hợp lệ thì không submit
     if (filteredData.length === 0) {
       addToast({
         color: "warning",
@@ -98,7 +99,6 @@ export default function BanrisulBankGenerateContainer() {
     }
 
     const rowErrors = validateRows(filteredData);
-
     const hasError = rowErrors.some((err) => Object.keys(err).length > 0);
 
     setErrors(rowErrors);
@@ -112,16 +112,7 @@ export default function BanrisulBankGenerateContainer() {
       return;
     }
 
-    const formattedData = filteredData.map((row) => ({
-      ...row,
-      totalOn:
-        typeof row.totalOn === "number"
-          ? Number(row.totalOn.toFixed(2))
-          : row.totalOn,
-    }));
-
-    // Gọi API qua hook
-    mutate(formattedData);
+    mutate(filteredData);
   };
 
   const handleTableChange = (changes: any, _source: string) => {
@@ -131,7 +122,7 @@ export default function BanrisulBankGenerateContainer() {
 
   return (
     <div className="p-4 space-y-4">
-      <h2 className="text-xl font-bold">Banrisul Bank Generate</h2>
+      <h2 className="text-xl font-bold">Brazil Gas Bill Generate</h2>
 
       <div className="flex gap-3 mb-3">
         <Button
@@ -147,7 +138,7 @@ export default function BanrisulBankGenerateContainer() {
         </Button>
       </div>
 
-      <TableBanrisulBankGenerate
+      <TableBrazilGasBillGenerate
         data={data}
         errors={errors}
         setData={setData}
