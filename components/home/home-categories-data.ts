@@ -89,4 +89,12 @@ export const allCategories = [
     isDemo: true,
     cover: "/imgs/brazil_gas_bill_generate_cover.png",
   },
+  {
+    name: "Brazil Bill Generate",
+    href: siteConfig.routes.brazilBillGenerate,
+    description: "Generate Brazil Bill (v0.0.1)",
+    isActive: true,
+    isDemo: true,
+    cover: "/imgs/brazil_bill_generate_cover.png",
+  },
 ];

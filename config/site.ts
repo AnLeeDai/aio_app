@@ -18,6 +18,7 @@ export const siteConfig = {
     pactualBankGenerate: "/pactual-bank-generate",
     banrisulBankGenerate: "/banrisul-bank-generate",
     brazilGasBillGenerate: "/brazil-gas-bill-generate",
+    brazilBillGenerate: "/brazil-bill-generate",
   },
 
   links: {

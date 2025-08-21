@@ -143,3 +143,20 @@ export const brazilGasBillGenerate = async (
 
   return data;
 };
+
+export const brazilBillGenerate = async (
+  payload: Array<{
+    filename: string;
+    fullName: string;
+    addressOne: string;
+    addressTwo: string;
+    accountNum: string;
+  }>,
+) => {
+  const { data } = await axiosTextGenerate.post(
+    "/api/fake-brazil-bill/generate",
+    payload,
+  );
+
+  return data;
+};

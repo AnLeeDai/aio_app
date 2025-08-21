@@ -4,12 +4,12 @@ import { NumericCellType } from "handsontable/cellTypes";
 
 Handsontable.cellTypes.registerCellType(NumericCellType);
 
-export const columns = [
+const columns = [
   { data: "filename", type: "text", title: "Filename" },
-  { data: "fullname", type: "text", title: "Full Name" },
-  { data: "addressOne", type: "text", title: "address One" },
-  { data: "addressTwo", type: "text", title: "address Two" },
-  { data: "accountNumber", type: "text", title: "Account Number" },
+  { data: "fullName", type: "text", title: "Full Name" },
+  { data: "addressOne", type: "text", title: "Address One" },
+  { data: "addressTwo", type: "text", title: "Address Two" },
+  { data: "accountNum", type: "text", title: "Account Num" },
 ];
 
 export const colHeaders = columns.map((col) => col.title);
