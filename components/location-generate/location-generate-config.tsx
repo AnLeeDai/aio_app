@@ -13,7 +13,7 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { IconDice6Filled } from "@tabler/icons-react";
 
-import { TRANS_ASCII_OPTIONS } from "./location-generate-data";
+import { TRANS_ASCII_OPTIONS, COUNTRY_OPTIONS } from "./location-generate-data";
 
 export interface LocationGenForm {
   limit: number;
@@ -33,7 +33,7 @@ export default function LocationGenerateConfig({
   const { control, handleSubmit } = useForm<LocationGenForm>({
     defaultValues: {
       limit: 10,
-      country: "Brazil",
+      country: "BR",
       trans_ascii: false,
     },
   });
@@ -75,24 +75,24 @@ export default function LocationGenerateConfig({
             }}
           />
 
-          {/* ---------- country ---------- */}
+          {/* ---------- country (BR, PE, MY, CO, JM, CL) ---------- */}
           <Controller
             control={control}
             name="country"
-            render={({ field, fieldState }) => (
-              <Input
-                {...field}
-                disabled
-                errorMessage={fieldState.error?.message}
-                isInvalid={!!fieldState.error}
+            render={({ field }) => (
+              <Select
                 label="Country"
-                placeholder="e.g. Brazil"
-              />
+                selectedKeys={[field.value]}
+                onSelectionChange={(keys) =>
+                  field.onChange(Array.from(keys)[0] as string)
+                }
+              >
+                {COUNTRY_OPTIONS.map((o) => (
+                  <SelectItem key={o.key}>{o.label}</SelectItem>
+                ))}
+              </Select>
             )}
-            rules={{
-              required: "Required",
-              maxLength: { value: 100, message: "Max 100 characters" },
-            }}
+            rules={{ required: "Required" }}
           />
 
           {/* ---------- Transliterate to ASCII ---------- */}
