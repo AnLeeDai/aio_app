@@ -16,6 +16,7 @@ import {
   type CopyItem,
 } from "@/hooks/use-copy-to-clipboard";
 import { type EbayEmailItem } from "@/hooks/use-email-ebay-generate";
+import { useI18n } from "@/i18n";
 
 interface EmailEbayGenerateResultProps {
   data: EbayEmailItem[];
@@ -32,6 +33,7 @@ export default function EmailEbayGenerateResult({
   emailSelectedKeys,
   setEmailSelectedKeys,
 }: EmailEbayGenerateResultProps) {
+  const { t } = useI18n();
   // Names card
   const nameRows: CopyItem[] = data.map((item, idx) => ({
     id: `name-${idx}`,
@@ -75,7 +77,7 @@ export default function EmailEbayGenerateResult({
 
         <CardBody>
           <Listbox
-            label="Generated Names"
+            label={t("name.generatedLabel")}
             selectedKeys={nameSelectedKeys}
             selectionMode="multiple"
             variant="flat"
@@ -112,7 +114,7 @@ export default function EmailEbayGenerateResult({
 
         <CardBody>
           <Listbox
-            label="Generated Emails"
+            label={t("ebay.generatedEmails")}
             selectedKeys={emailSelectedKeys}
             selectionMode="multiple"
             variant="flat"

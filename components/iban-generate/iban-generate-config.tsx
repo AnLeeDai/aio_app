@@ -15,6 +15,8 @@ import { IconDice6Filled } from "@tabler/icons-react";
 
 import { COUNTRY_OPTIONS } from "./iban-generate-data";
 
+import { useI18n } from "@/i18n";
+
 export interface IBANGenForm {
   iban_number: number;
   country: "BR";
@@ -29,6 +31,7 @@ export default function IBANGenerateConfig({
   onGenerate,
   isLoading,
 }: IBANGenerateConfigProps) {
+  const { t } = useI18n();
   const { control, handleSubmit } = useForm<IBANGenForm>({
     defaultValues: {
       iban_number: 10,
@@ -41,9 +44,7 @@ export default function IBANGenerateConfig({
   return (
     <Card as="form" onSubmit={submit}>
       <CardHeader>
-        <h2 className="text-lg font-semibold">
-          Select options to generate random IBANs
-        </h2>
+        <h2 className="text-lg font-semibold">{t("iban.header")}</h2>
       </CardHeader>
 
       <Divider />
@@ -59,17 +60,17 @@ export default function IBANGenerateConfig({
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Number of IBANs"
-                placeholder="e.g. 10"
+                label={t("iban.numIBANs")}
+                placeholder={t("common.egNumber", { n: 10 })}
                 type="number"
                 value={field.value !== undefined ? String(field.value) : ""}
                 onChange={(e) => field.onChange(+e.target.value)}
               />
             )}
             rules={{
-              required: "Required",
-              min: { value: 1, message: "Min 1" },
-              max: { value: 100, message: "Max 100" },
+              required: t("validation.required"),
+              min: { value: 1, message: t("validation.min", { n: 1 }) },
+              max: { value: 100, message: t("validation.max", { n: 100 }) },
             }}
           />
 
@@ -79,14 +80,14 @@ export default function IBANGenerateConfig({
             name="country"
             render={({ field }) => (
               <Select
-                label="Country"
+                label={t("common.country")}
                 selectedKeys={[field.value]}
                 onSelectionChange={(keys) =>
                   field.onChange(Array.from(keys)[0] as "BR")
                 }
               >
                 {COUNTRY_OPTIONS.map((o) => (
-                  <SelectItem key={o.key}>{o.label}</SelectItem>
+                  <SelectItem key={o.key}>{t(`country.${o.key}`)}</SelectItem>
                 ))}
               </Select>
             )}
@@ -102,7 +103,7 @@ export default function IBANGenerateConfig({
             startContent={<IconDice6Filled size={22} />}
             type="submit"
           >
-            Generate IBANs
+            {t("iban.generate")}
           </Button>
         </div>
       </CardBody>

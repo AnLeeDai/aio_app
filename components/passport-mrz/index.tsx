@@ -12,6 +12,7 @@ import {
   PassportMRZGResponse,
   usePassportMRZGenerate,
 } from "@/hooks/use-passport-mrz-generate";
+import { useI18n } from "@/i18n";
 
 dayjs.extend(customParseFormat);
 registerAllModules();
@@ -77,6 +78,7 @@ const initialRow = {
 
 /* ---------- component ---------- */
 export default function PassportMRZContainer() {
+  const { t } = useI18n();
   const [data, setData] = useState([initialRow]);
   const [cols] = useState(baseColumns);
 
@@ -103,7 +105,7 @@ export default function PassportMRZContainer() {
 
   return (
     <div className="p-4 space-y-4">
-      <h2 className="text-xl font-bold">Passport MRZ Sheet</h2>
+      <h2 className="text-xl font-bold">{t("passportMrz.title")}</h2>
 
       <div className="flex gap-2">
         <Button
@@ -117,7 +119,7 @@ export default function PassportMRZContainer() {
             if (rowsToSend.length) mutate(rowsToSend as any);
           }}
         >
-          {isPending ? "Generating…" : "Submit"}
+          {isPending ? t("common.generating") : t("common.submit")}
         </Button>
 
         <Button
@@ -128,7 +130,7 @@ export default function PassportMRZContainer() {
             setData([initialRow]);
           }}
         >
-          Reset
+          {t("common.reset")}
         </Button>
       </div>
 

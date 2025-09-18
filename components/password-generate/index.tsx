@@ -8,9 +8,11 @@ import TitleHeader from "../title-header";
 import PasswordGenerateConfig from "./password-generate-config";
 import PasswordGenerateResult from "./password-generate-result";
 
+import { useI18n } from "@/i18n";
 import { usePasswordGenerate } from "@/hooks/use-password-generate";
 
 export default function PasswordGenerateContainers() {
+  const { t } = useI18n();
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
   const [password, setPassword] = useState<string[]>([]);
 
@@ -28,7 +30,7 @@ export default function PasswordGenerateContainers() {
 
   return (
     <section>
-      <TitleHeader title="Password Generate" />
+      <TitleHeader title={t("password.title")} />
 
       <div
         className="

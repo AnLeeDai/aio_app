@@ -9,8 +9,10 @@ import { HistoryPactualBankGenerate } from "./history-pactual-bank-generate";
 import { TablePactualBankGenerate } from "./table-pactual-bank-generate";
 
 import { usePactualBillGenerate } from "@/hooks/use-pactual-bill-generate";
+import { useI18n } from "@/i18n";
 
 export default function PactutalBankGenerateContainer() {
+  const { t } = useI18n();
   const initialData: any[] = [];
   const [data, setData] = useState(initialData);
   const [errors, setErrors] = useState<any[]>([]);
@@ -39,7 +41,7 @@ export default function PactutalBankGenerateContainer() {
     onError: (err: any) => {
       addToast({
         color: "danger",
-        description: err?.message || "Có lỗi xảy ra!",
+        description: err?.message || t("toasts.error.title"),
       });
     },
   });
@@ -48,17 +50,18 @@ export default function PactutalBankGenerateContainer() {
     const rowErrors = rows.map((row) => {
       const err: any = {};
 
-      if (!row.filename?.trim()) err.filename = "Required";
-      if (!row.fullname?.trim()) err.fullname = "Required";
-      if (!row.addressOne?.trim()) err.addressOne = "Required";
-      if (!row.addressTwo?.trim()) err.addressTwo = "Required";
-      if (!row.accountNumber?.trim()) err.accountNumber = "Required";
+      if (!row.filename?.trim()) err.filename = t("validation.required");
+      if (!row.fullname?.trim()) err.fullname = t("validation.required");
+      if (!row.addressOne?.trim()) err.addressOne = t("validation.required");
+      if (!row.addressTwo?.trim()) err.addressTwo = t("validation.required");
+      if (!row.accountNumber?.trim())
+        err.accountNumber = t("validation.required");
       if (
         row.totalOn === undefined ||
         row.totalOn === null ||
         isNaN(row.totalOn)
       )
-        err.totalOn = "Required";
+        err.totalOn = t("validation.required");
 
       return err;
     });
@@ -83,7 +86,7 @@ export default function PactutalBankGenerateContainer() {
     if (filteredData.length === 0) {
       addToast({
         color: "warning",
-        description: "Vui lòng nhập ít nhất một dòng dữ liệu!",
+        description: t("bank.common.enterAtLeastOneRow"),
       });
 
       return;
@@ -98,7 +101,7 @@ export default function PactutalBankGenerateContainer() {
     if (hasError) {
       addToast({
         color: "warning",
-        description: "Vui lòng nhập đầy đủ thông tin các dòng!",
+        description: t("bank.common.fillAllRows"),
       });
 
       return;
@@ -118,7 +121,7 @@ export default function PactutalBankGenerateContainer() {
 
   return (
     <div className="p-4 space-y-4">
-      <h2 className="text-xl font-bold">Pactual Bank Generate</h2>
+      <h2 className="text-xl font-bold">{t("bank.pactual.title")}</h2>
 
       <div className="flex gap-3 mb-3">
         <Button
@@ -127,10 +130,10 @@ export default function PactutalBankGenerateContainer() {
           isLoading={isPending}
           onPress={() => rhfHandleSubmit(onSubmit)()}
         >
-          Submit
+          {t("common.submit")}
         </Button>
         <Button fullWidth color="secondary" onPress={handleReset}>
-          Reset
+          {t("common.reset")}
         </Button>
       </div>
 

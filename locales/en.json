@@ -1,0 +1,180 @@
+{
+  "lang": {
+    "vi": "Vietnamese",
+    "en": "English"
+  },
+  "navbar": {
+    "title": "DROP SHIPPING TOOLS 1.0",
+    "donate": "Donate"
+  },
+  "home": {
+    "welcome": "Welcome to the DROP SHIPPING TOOLS 1.0"
+  },
+  "search": {
+    "ariaLabel": "Search tools",
+    "placeholder": "Search tools...",
+    "try": "Try",
+    "suggestions": "Suggestions"
+  },
+  "donate": {
+    "title": "Donate",
+    "bankTransfer": "Bank Transfer",
+    "bankDesc": "Support the project via bank transfer",
+    "bank": "Bank",
+    "accountName": "Account Name",
+    "accountNumber": "Account Number",
+    "swift": "SWIFT/BIC",
+    "qrTitle": "Scan QR (TPBank)",
+    "qrAlt": "TPBank QR code to support DROP SHIPPING TOOLS",
+    "qrDesc": "Use your banking app to scan for quick transfer",
+    "note": "Thank you for supporting DROP SHIPPING TOOLS!"
+  },
+  "common": {
+    "copy": "Copy",
+    "copied": "Copied",
+    "submit": "Submit",
+    "reset": "Reset",
+    "generating": "Generating…",
+    "yes": "Yes",
+    "no": "No",
+    "egNumber": "e.g. {n}",
+    "country": "Country",
+    "locale": "Select a locale",
+    "transliterateToAscii": "Transliterate to ASCII"
+  },
+  "copy": {
+    "copySelected": "Copy {count} selected",
+    "removeSelected": "Remove {count} selected",
+    "copyAll": "Copy All"
+  },
+  "passportMrz": {
+    "title": "Passport MRZ Sheet"
+  },
+  "password": {
+    "title": "Password Generate",
+    "header": "Select options to generate random password.",
+    "numPasswords": "Number of passwords",
+    "length": "Password length",
+    "includeSpecial": "Include special characters",
+    "includeUppercase": "Include uppercase",
+    "generate": "Generate Password",
+    "generatedLabel": "Generated Password"
+  },
+  "iban": {
+    "title": "IBAN Generate",
+    "header": "Select options to generate random IBANs",
+    "numIBANs": "Number of IBANs",
+    "generate": "Generate IBANs",
+    "generatedLabel": "Generated IBANs"
+  },
+  "name": {
+    "title": "Name Generate",
+    "header": "Select options to generate random names.",
+    "numNames": "Number of names",
+    "selectFormat": "Select name format",
+    "format": {
+      "first_last": "First Last",
+      "first_middle_last": "First Middle Last"
+    },
+    "selectGender": "Select gender",
+    "gender": { "male": "Male", "female": "Female" },
+    "generate": "Generate Names",
+    "generatedLabel": "Generated Names"
+  },
+  "location": {
+    "title": "Location Generate",
+    "header": "Select options to generate random locations",
+    "numLocations": "Number of locations",
+    "generate": "Generate Locations",
+    "generatedLabel": "Generated Locations"
+  },
+  "dob": {
+    "title": "DOB Generate",
+    "header": "Select options to generate random DOB",
+    "numDobs": "Number of DOBs",
+    "minAge": "Min age",
+    "maxAge": "Max age",
+    "dateFormat": "Date format",
+    "maxGteMin": "Max age must be ≥ Min age",
+    "generate": "Generate DOB",
+    "generatedLabel": "Generated DOBs"
+  },
+  "ebay": {
+    "title": "Hotmail Ebay Generate",
+    "header": "Select options to generate Hotmail accounts",
+    "numEmails": "Number of emails",
+    "generate": "Generate Emails",
+    "generatedEmails": "Generated Emails"
+  },
+  "passport": {
+    "title": "Passport Generate",
+    "header": "Select options to generate random passports",
+    "numPassports": "Number of passports",
+    "prefixOptional": "Prefix (optional)",
+    "prefixEg": "e.g. {eg}",
+    "generate": "Generate Passports",
+    "generatedLabel": "Generated passport"
+  },
+  
+  "validation": {
+    "required": "Required",
+    "min": "Min {n}",
+    "max": "Max {n}"
+  },
+  "country": {
+    "BR": "Brazil (BR)",
+    "US": "United States (US)",
+    "UK": "United Kingdom (UK)",
+    "VN": "Vietnam (VN)",
+    "DE": "Germany (DE)",
+    "FR": "France (FR)",
+    "JP": "Japan (JP)",
+    "ES": "Spain (ES)",
+    "IT": "Italy (IT)",
+    "RU": "Russia (RU)",
+    "CN": "China (CN)",
+    "KR": "South Korea (KR)",
+    "PE": "Peru (PE)",
+    "CO": "Colombia (CO)",
+    "JM": "Jamaica (JM)",
+    "CL": "Chile (CL)"
+  },
+  "toasts": {
+    "copied": {
+      "title": "Copied!",
+      "desc": "Copied {count} {item}{count, plural, one {} other {s}}."
+    },
+    "copyFailed": {
+      "title": "Copy failed",
+      "desc": "Your browser blocked clipboard access."
+    },
+    "nothingSelected": {
+      "title": "Nothing selected",
+      "desc": "Please choose at least one {item}."
+    },
+    "emptyList": {
+      "title": "Empty list",
+      "desc": "There is no {item} to copy."
+    },
+    "selectionReset": {
+      "title": "Selection reset",
+      "desc": "All selections have been cleared."
+    },
+    "error": {
+      "title": "Error",
+      "desc": "Something went wrong. Please try again."
+    }
+  },
+  "bank": {
+    "common": {
+      "enterAtLeastOneRow": "Please enter at least one row of data!",
+      "fillAllRows": "Please fill in all required fields in each row!"
+    },
+    "banrisul": {
+      "title": "Banrisul Bank Generate"
+    },
+    "pactual": {
+      "title": "Pactual Bank Generate"
+    }
+  }
+}

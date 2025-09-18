@@ -15,6 +15,8 @@ import { IconDice6Filled } from "@tabler/icons-react";
 
 import { COUNTRY_OPTIONS } from "./passport-generate-data";
 
+import { useI18n } from "@/i18n";
+
 export interface PassportGenForm {
   id_number: number;
   country: "US" | "BR";
@@ -30,6 +32,7 @@ export default function PassportGenerateConfig({
   onGenerate,
   isLoading,
 }: PassportGenerateConfigProps) {
+  const { t } = useI18n();
   const { control, handleSubmit } = useForm<PassportGenForm>({
     defaultValues: {
       id_number: 10,
@@ -51,9 +54,7 @@ export default function PassportGenerateConfig({
   return (
     <Card as="form" onSubmit={onSubmit}>
       <CardHeader>
-        <h2 className="text-lg font-semibold">
-          Select options to generate random passports
-        </h2>
+        <h2 className="text-lg font-semibold">{t("passport.header")}</h2>
       </CardHeader>
 
       <Divider />
@@ -69,17 +70,17 @@ export default function PassportGenerateConfig({
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Number of passports"
-                placeholder="e.g. 100"
+                label={t("passport.numPassports")}
+                placeholder={t("common.egNumber", { n: 100 })}
                 type="number"
                 value={field.value !== undefined ? String(field.value) : ""}
                 onChange={(e) => field.onChange(+e.target.value)}
               />
             )}
             rules={{
-              required: "Required",
-              min: { value: 1, message: "Min 1" },
-              max: { value: 100, message: "Max 100" },
+              required: t("validation.required"),
+              min: { value: 1, message: t("validation.min", { n: 1 }) },
+              max: { value: 100, message: t("validation.max", { n: 100 }) },
             }}
           />
 
@@ -90,9 +91,11 @@ export default function PassportGenerateConfig({
             render={({ field }) => (
               <Input
                 {...field}
-                label="Prefix (optional)"
+                label={t("passport.prefixOptional")}
                 maxLength={prefixLimit}
-                placeholder={`e.g. ${prefixLimit === 1 ? "A" : "AA"}`}
+                placeholder={t("passport.prefixEg", {
+                  eg: prefixLimit === 1 ? "A" : "AA",
+                })}
                 type="text"
                 value={field.value ?? ""}
                 onChange={(e) =>
@@ -113,14 +116,14 @@ export default function PassportGenerateConfig({
             name="country"
             render={({ field }) => (
               <Select
-                label="Country"
+                label={t("common.country")}
                 selectedKeys={[field.value]}
                 onSelectionChange={(keys) =>
                   field.onChange(Array.from(keys)[0] as "US" | "BR")
                 }
               >
                 {COUNTRY_OPTIONS.map((o) => (
-                  <SelectItem key={o.key}>{o.label}</SelectItem>
+                  <SelectItem key={o.key}>{t(`country.${o.key}`)}</SelectItem>
                 ))}
               </Select>
             )}
@@ -136,7 +139,7 @@ export default function PassportGenerateConfig({
             startContent={<IconDice6Filled size={22} />}
             type="submit"
           >
-            Generate Passports
+            {t("passport.generate")}
           </Button>
         </div>
       </CardBody>

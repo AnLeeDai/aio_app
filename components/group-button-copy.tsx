@@ -7,6 +7,8 @@ import {
   IconClipboardCheckFilled,
 } from "@tabler/icons-react";
 
+import { useI18n } from "@/i18n";
+
 export interface GroupButtonCopyProps {
   /** Tổng số phần tử trong danh sách (để ẩn nút khi rỗng) */
   totalCount: number;
@@ -27,6 +29,8 @@ export default function GroupButtonCopy({
   onCopyAll,
   onResetSelection,
 }: GroupButtonCopyProps) {
+  const { t } = useI18n();
+
   if (totalCount === 0) return null;
 
   return (
@@ -42,7 +46,7 @@ export default function GroupButtonCopy({
           startContent={<IconClipboardListFilled size={22} />}
           onPress={onCopySelected}
         >
-          Copy&nbsp;{selectedCount}&nbsp;Selected
+          {t("copy.copySelected", { count: selectedCount })}
         </Button>
 
         {selectedCount > 0 && (
@@ -51,7 +55,7 @@ export default function GroupButtonCopy({
             startContent={<IconClipboardXFilled size={22} />}
             onPress={onResetSelection}
           >
-            Remove&nbsp;{selectedCount}&nbsp;Selected
+            {t("copy.removeSelected", { count: selectedCount })}
           </Button>
         )}
 
@@ -60,7 +64,7 @@ export default function GroupButtonCopy({
           startContent={<IconClipboardCheckFilled size={22} />}
           onPress={onCopyAll}
         >
-          Copy&nbsp;All
+          {t("copy.copyAll")}
         </Button>
       </div>
     </ScrollShadow>

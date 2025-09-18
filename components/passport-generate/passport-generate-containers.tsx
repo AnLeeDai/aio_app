@@ -9,8 +9,10 @@ import PassportGenerateConfig from "./passport-generate-config";
 import PassportGenerateResult from "./passport-generate-result";
 
 import { usePassportGenerate } from "@/hooks/use-passport-generate";
+import { useI18n } from "@/i18n";
 
 export default function PassportGenerateContainers() {
+  const { t } = useI18n();
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
   const [passport, setPassport] = useState<string[]>([]);
 
@@ -28,7 +30,7 @@ export default function PassportGenerateContainers() {
 
   return (
     <section>
-      <TitleHeader title="Passport Generate" />
+      <TitleHeader title={t("passport.title")} />
 
       <div
         className="

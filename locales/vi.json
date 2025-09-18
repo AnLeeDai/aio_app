@@ -1,0 +1,179 @@
+{
+  "lang": {
+    "vi": "Tiếng Việt",
+    "en": "Tiếng Anh"
+  },
+  "navbar": {
+    "title": "DROP SHIPPING TOOLS 1.0",
+    "donate": "Ủng hộ"
+  },
+  "home": {
+    "welcome": "Chào mừng đến với DROP SHIPPING TOOLS 1.0"
+  },
+  "search": {
+    "ariaLabel": "Tìm kiếm công cụ",
+    "placeholder": "Tìm kiếm công cụ...",
+    "try": "Thử",
+    "suggestions": "Gợi ý"
+  },
+  "donate": {
+    "title": "Ủng hộ",
+    "bankTransfer": "Chuyển khoản ngân hàng",
+    "bankDesc": "Ủng hộ dự án qua chuyển khoản ngân hàng",
+    "bank": "Ngân hàng",
+    "accountName": "Chủ tài khoản",
+    "accountNumber": "Số tài khoản",
+    "swift": "SWIFT/BIC",
+    "qrTitle": "Quét mã QR (TPBank)",
+    "qrAlt": "Mã QR TPBank để ủng hộ DROP SHIPPING TOOLS",
+    "qrDesc": "Dùng app ngân hàng quét mã để chuyển nhanh",
+    "note": "Cảm ơn bạn đã ủng hộ DROP SHIPPING TOOLS!"
+  },
+  "common": {
+    "copy": "Sao chép",
+    "copied": "Đã sao chép",
+    "submit": "Gửi",
+    "reset": "Làm mới",
+    "generating": "Đang tạo…",
+    "yes": "Có",
+    "no": "Không",
+    "egNumber": "vd. {n}",
+    "country": "Quốc gia",
+    "locale": "Chọn ngôn ngữ/địa phương",
+    "transliterateToAscii": "Chuyển ký tự sang ASCII"
+  },
+  "copy": {
+    "copySelected": "Sao chép {count} mục đã chọn",
+    "removeSelected": "Bỏ chọn {count} mục",
+    "copyAll": "Sao chép tất cả"
+  },
+  "passportMrz": {
+    "title": "Bảng MRZ Hộ chiếu"
+  },
+  "password": {
+    "title": "Tạo mật khẩu",
+    "header": "Chọn tuỳ chọn để tạo mật khẩu ngẫu nhiên.",
+    "numPasswords": "Số lượng mật khẩu",
+    "length": "Độ dài mật khẩu",
+    "includeSpecial": "Bao gồm ký tự đặc biệt",
+    "includeUppercase": "Bao gồm chữ hoa",
+    "generate": "Tạo mật khẩu",
+    "generatedLabel": "Mật khẩu đã tạo"
+  },
+  "iban": {
+    "title": "Tạo IBAN",
+    "header": "Chọn tuỳ chọn để tạo IBAN ngẫu nhiên",
+    "numIBANs": "Số lượng IBAN",
+    "generate": "Tạo IBAN",
+    "generatedLabel": "IBAN đã tạo"
+  },
+  "name": {
+    "title": "Tạo tên",
+    "header": "Chọn tuỳ chọn để tạo tên ngẫu nhiên.",
+    "numNames": "Số lượng tên",
+    "selectFormat": "Chọn định dạng tên",
+    "format": {
+      "first_last": "Họ Tên",
+      "first_middle_last": "Họ Đệm Tên"
+    },
+    "selectGender": "Chọn giới tính",
+    "gender": { "male": "Nam", "female": "Nữ" },
+    "generate": "Tạo tên",
+    "generatedLabel": "Danh sách tên"
+  },
+  "location": {
+    "title": "Tạo địa chỉ",
+    "header": "Chọn tuỳ chọn để tạo địa chỉ ngẫu nhiên",
+    "numLocations": "Số lượng địa chỉ",
+    "generate": "Tạo địa chỉ",
+    "generatedLabel": "Địa chỉ đã tạo"
+  },
+  "dob": {
+    "title": "Tạo ngày sinh",
+    "header": "Chọn tuỳ chọn để tạo ngày sinh ngẫu nhiên",
+    "numDobs": "Số lượng ngày sinh",
+    "minAge": "Tuổi tối thiểu",
+    "maxAge": "Tuổi tối đa",
+    "dateFormat": "Định dạng ngày",
+    "maxGteMin": "Tuổi tối đa phải ≥ tuổi tối thiểu",
+    "generate": "Tạo ngày sinh",
+    "generatedLabel": "Ngày sinh đã tạo"
+  },
+  "ebay": {
+    "title": "Tạo Hotmail Ebay",
+    "header": "Chọn tuỳ chọn để tạo tài khoản Hotmail",
+    "numEmails": "Số lượng email",
+    "generate": "Tạo email",
+    "generatedEmails": "Email đã tạo"
+  },
+  "passport": {
+    "title": "Tạo hộ chiếu",
+    "header": "Chọn tuỳ chọn để tạo hộ chiếu ngẫu nhiên",
+    "numPassports": "Số lượng hộ chiếu",
+    "prefixOptional": "Tiền tố (tuỳ chọn)",
+    "prefixEg": "vd. {eg}",
+    "generate": "Tạo hộ chiếu",
+    "generatedLabel": "Hộ chiếu đã tạo"
+  },
+  "validation": {
+    "required": "Bắt buộc",
+    "min": "Tối thiểu {n}",
+    "max": "Tối đa {n}"
+  },
+  "country": {
+    "BR": "Brazil (BR)",
+    "US": "Hoa Kỳ (US)",
+    "UK": "Vương quốc Anh (UK)",
+    "VN": "Việt Nam (VN)",
+    "DE": "Đức (DE)",
+    "FR": "Pháp (FR)",
+    "JP": "Nhật Bản (JP)",
+    "ES": "Tây Ban Nha (ES)",
+    "IT": "Ý (IT)",
+    "RU": "Nga (RU)",
+    "CN": "Trung Quốc (CN)",
+    "KR": "Hàn Quốc (KR)",
+    "PE": "Peru (PE)",
+    "CO": "Colombia (CO)",
+    "JM": "Jamaica (JM)",
+    "CL": "Chile (CL)"
+  },
+  "toasts": {
+    "copied": {
+      "title": "Đã sao chép!",
+      "desc": "Đã sao chép {count} {item}"
+    },
+    "copyFailed": {
+      "title": "Sao chép thất bại",
+      "desc": "Trình duyệt chặn truy cập clipboard."
+    },
+    "nothingSelected": {
+      "title": "Chưa chọn mục nào",
+      "desc": "Vui lòng chọn ít nhất một {item}."
+    },
+    "emptyList": {
+      "title": "Danh sách trống",
+      "desc": "Không có {item} để sao chép."
+    },
+    "selectionReset": {
+      "title": "Đã xoá lựa chọn",
+      "desc": "Tất cả lựa chọn đã được xoá."
+    },
+    "error": {
+      "title": "Lỗi",
+      "desc": "Đã có lỗi xảy ra. Vui lòng thử lại."
+    }
+  },
+  "bank": {
+    "common": {
+      "enterAtLeastOneRow": "Vui lòng nhập ít nhất một dòng dữ liệu!",
+      "fillAllRows": "Vui lòng nhập đầy đủ thông tin các dòng!"
+    },
+    "banrisul": {
+      "title": "Tạo hoá đơn ngân hàng Banrisul"
+    },
+    "pactual": {
+      "title": "Tạo hoá đơn ngân hàng Pactual"
+    }
+  }
+}

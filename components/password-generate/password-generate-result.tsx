@@ -10,6 +10,7 @@ import {
 import GroupButtonCopy from "../group-button-copy";
 
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import { useI18n } from "@/i18n";
 
 interface PasswordGenerateResultProps {
   selectedKeys: Set<string>;
@@ -22,6 +23,7 @@ export default function PasswordGenerateResult({
   setSelectedKeys,
   data,
 }: PasswordGenerateResultProps) {
+  const { t } = useI18n();
   const copyNames = useCopyToClipboard(
     data || [],
     selectedKeys,
@@ -49,7 +51,7 @@ export default function PasswordGenerateResult({
 
       <CardBody>
         <Listbox
-          label="Generated Password"
+          label={t("password.generatedLabel")}
           selectedKeys={selectedKeys}
           selectionMode="multiple"
           variant="flat"

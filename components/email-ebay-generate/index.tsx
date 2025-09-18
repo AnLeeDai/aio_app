@@ -12,8 +12,10 @@ import {
   useEmailEbayGenerate,
   type EbayEmailItem,
 } from "@/hooks/use-email-ebay-generate";
+import { useI18n } from "@/i18n";
 
 export default function EmailEbayGenerateContainer() {
+  const { t } = useI18n();
   const [nameSelectedKeys, setNameSelectedKeys] = useState<Set<string>>(
     new Set(),
   );
@@ -37,7 +39,7 @@ export default function EmailEbayGenerateContainer() {
 
   return (
     <section>
-      <TitleHeader title="Hotmail (Ebay) Generate" />
+      <TitleHeader title={t("ebay.title")} />
 
       <div
         className="

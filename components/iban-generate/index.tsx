@@ -9,8 +9,10 @@ import IBANGenerateConfig from "./iban-generate-config";
 import IBANGenerateResult from "./iban-generate-result";
 
 import { useIBANGenerate } from "@/hooks/use-iban-generate";
+import { useI18n } from "@/i18n";
 
 export default function IBANGenerateContainers() {
+  const { t } = useI18n();
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
   const [iban, setIBAN] = useState<string[]>([]);
 
@@ -28,7 +30,7 @@ export default function IBANGenerateContainers() {
 
   return (
     <section>
-      <TitleHeader title="IBAN Generate" />
+      <TitleHeader title={t("iban.title")} />
 
       <div
         className="

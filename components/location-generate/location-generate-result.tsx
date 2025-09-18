@@ -12,6 +12,7 @@ import {
 import GroupButtonCopy from "../group-button-copy";
 
 import { useCopyToClipboard, CopyItem } from "@/hooks/use-copy-to-clipboard";
+import { useI18n } from "@/i18n";
 
 interface LocationGenerateResultProps {
   data: string[];
@@ -24,6 +25,7 @@ export default function LocationGenerateResult({
   selectedKeys,
   setSelectedKeys,
 }: LocationGenerateResultProps) {
+  const { t } = useI18n();
   const rows: CopyItem[] = data.map((loc, idx) => ({
     id: `row-${idx}`,
     label: loc,
@@ -52,7 +54,7 @@ export default function LocationGenerateResult({
 
       <CardBody>
         <Listbox
-          label="Generated Locations"
+          label={t("location.generatedLabel")}
           selectedKeys={selectedKeys}
           selectionMode="multiple"
           variant="flat"

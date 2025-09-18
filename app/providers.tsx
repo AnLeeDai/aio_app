@@ -11,6 +11,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useState } from "react";
 import "handsontable/dist/handsontable.full.min.css";
+import { I18nProvider } from "@/i18n";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -50,7 +51,9 @@ export function Providers({ children, themeProps }: ProvidersProps) {
       {process.env.NODE_ENV === "development" && <ReactQueryDevtools />}
       <HeroUIProvider navigate={router.push}>
         <ToastProvider maxVisibleToasts={2} placement="top-center" />
-        <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+        <NextThemesProvider {...themeProps}>
+          <I18nProvider>{children}</I18nProvider>
+        </NextThemesProvider>
       </HeroUIProvider>
     </QueryClientProvider>
   );

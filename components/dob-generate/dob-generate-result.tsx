@@ -12,6 +12,7 @@ import {
 import GroupButtonCopy from "../group-button-copy";
 
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import { useI18n } from "@/i18n";
 
 interface DOBGenerateResultProps {
   selectedKeys: Set<string>;
@@ -24,6 +25,7 @@ export default function DOBGenerateResult({
   setSelectedKeys,
   data,
 }: DOBGenerateResultProps) {
+  const { t } = useI18n();
   const copyDOB = useCopyToClipboard(
     data,
     selectedKeys,
@@ -51,7 +53,7 @@ export default function DOBGenerateResult({
 
       <CardBody>
         <Listbox
-          label="Generated DOBs"
+          label={t("dob.generatedLabel")}
           selectedKeys={selectedKeys}
           selectionMode="multiple"
           variant="flat"

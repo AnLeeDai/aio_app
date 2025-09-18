@@ -15,6 +15,8 @@ import { IconDice6Filled } from "@tabler/icons-react";
 
 import { DATE_FORMAT_OPTIONS } from "./dob-generate-data";
 
+import { useI18n } from "@/i18n";
+
 export interface DOBGenForm {
   dob_num: number;
   min_age: number;
@@ -31,6 +33,7 @@ export default function DOBGenerateConfig({
   onGenerate,
   isLoading,
 }: DOBGenerateConfigProps) {
+  const { t } = useI18n();
   const { control, handleSubmit, watch } = useForm<DOBGenForm>({
     defaultValues: {
       dob_num: 10,
@@ -48,9 +51,7 @@ export default function DOBGenerateConfig({
   return (
     <Card as="form" onSubmit={onSubmit}>
       <CardHeader>
-        <h2 className="text-lg font-semibold">
-          Select options to generate random DOB
-        </h2>
+        <h2 className="text-lg font-semibold">{t("dob.header")}</h2>
       </CardHeader>
 
       <Divider />
@@ -66,17 +67,17 @@ export default function DOBGenerateConfig({
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Number of DOBs"
-                placeholder="e.g. 100"
+                label={t("dob.numDobs")}
+                placeholder={t("common.egNumber", { n: 100 })}
                 type="number"
                 value={field.value !== undefined ? String(field.value) : ""}
                 onChange={(e) => field.onChange(+e.target.value)}
               />
             )}
             rules={{
-              required: "Required",
-              min: { value: 1, message: "Min 1" },
-              max: { value: 100, message: "Max 100" },
+              required: t("validation.required"),
+              min: { value: 1, message: t("validation.min", { n: 1 }) },
+              max: { value: 100, message: t("validation.max", { n: 100 }) },
             }}
           />
 
@@ -89,17 +90,17 @@ export default function DOBGenerateConfig({
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Min age"
-                placeholder="e.g. 18"
+                label={t("dob.minAge")}
+                placeholder={t("common.egNumber", { n: 18 })}
                 type="number"
                 value={field.value !== undefined ? String(field.value) : ""}
                 onChange={(e) => field.onChange(+e.target.value)}
               />
             )}
             rules={{
-              required: "Required",
-              min: { value: 18, message: "Min 18" },
-              max: { value: 100, message: "Max 100" },
+              required: t("validation.required"),
+              min: { value: 18, message: t("validation.min", { n: 18 }) },
+              max: { value: 100, message: t("validation.max", { n: 100 }) },
             }}
           />
 
@@ -112,18 +113,18 @@ export default function DOBGenerateConfig({
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Max age"
-                placeholder="e.g. 30"
+                label={t("dob.maxAge")}
+                placeholder={t("common.egNumber", { n: 30 })}
                 type="number"
                 value={field.value !== undefined ? String(field.value) : ""}
                 onChange={(e) => field.onChange(+e.target.value)}
               />
             )}
             rules={{
-              required: "Required",
-              min: { value: 0, message: "Min 0" },
-              max: { value: 120, message: "Max 120" },
-              validate: (v) => v >= minAge || "Max age must be ≥ Min age",
+              required: t("validation.required"),
+              min: { value: 0, message: t("validation.min", { n: 0 }) },
+              max: { value: 120, message: t("validation.max", { n: 120 }) },
+              validate: (v) => v >= minAge || t("dob.maxGteMin"),
             }}
           />
 
@@ -133,7 +134,7 @@ export default function DOBGenerateConfig({
             name="date_format"
             render={({ field }) => (
               <Select
-                label="Date format"
+                label={t("dob.dateFormat")}
                 selectedKeys={[field.value]}
                 onSelectionChange={(keys) =>
                   field.onChange(Array.from(keys)[0])
@@ -155,7 +156,7 @@ export default function DOBGenerateConfig({
             startContent={<IconDice6Filled size={22} />}
             type="submit"
           >
-            Generate DOB
+            {t("dob.generate")}
           </Button>
         </div>
       </CardBody>

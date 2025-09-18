@@ -15,6 +15,8 @@ import { IconDice6Filled } from "@tabler/icons-react";
 
 import { TRANS_ASCII_OPTIONS, COUNTRY_OPTIONS } from "./location-generate-data";
 
+import { useI18n } from "@/i18n";
+
 export interface LocationGenForm {
   limit: number;
   country: string;
@@ -30,6 +32,7 @@ export default function LocationGenerateConfig({
   onGenerate,
   isLoading,
 }: LocationGenerateConfigProps) {
+  const { t } = useI18n();
   const { control, handleSubmit } = useForm<LocationGenForm>({
     defaultValues: {
       limit: 10,
@@ -43,9 +46,7 @@ export default function LocationGenerateConfig({
   return (
     <Card as="form" onSubmit={submit}>
       <CardHeader>
-        <h2 className="text-lg font-semibold">
-          Select options to generate random locations
-        </h2>
+        <h2 className="text-lg font-semibold">{t("location.header")}</h2>
       </CardHeader>
 
       <Divider />
@@ -61,17 +62,17 @@ export default function LocationGenerateConfig({
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Number of locations"
-                placeholder="e.g. 10"
+                label={t("location.numLocations")}
+                placeholder={t("common.egNumber", { n: 10 })}
                 type="number"
                 value={field.value !== undefined ? String(field.value) : ""}
                 onChange={(e) => field.onChange(+e.target.value)}
               />
             )}
             rules={{
-              required: "Required",
-              min: { value: 1, message: "Min 1" },
-              max: { value: 10000, message: "Max 10 000" },
+              required: t("validation.required"),
+              min: { value: 1, message: t("validation.min", { n: 1 }) },
+              max: { value: 10000, message: t("validation.max", { n: 10000 }) },
             }}
           />
 
@@ -81,14 +82,14 @@ export default function LocationGenerateConfig({
             name="country"
             render={({ field }) => (
               <Select
-                label="Country"
+                label={t("common.country")}
                 selectedKeys={[field.value]}
                 onSelectionChange={(keys) =>
                   field.onChange(Array.from(keys)[0] as string)
                 }
               >
                 {COUNTRY_OPTIONS.map((o) => (
-                  <SelectItem key={o.key}>{o.label}</SelectItem>
+                  <SelectItem key={o.key}>{t(`country.${o.key}`)}</SelectItem>
                 ))}
               </Select>
             )}
@@ -101,14 +102,16 @@ export default function LocationGenerateConfig({
             name="trans_ascii"
             render={({ field }) => (
               <Select
-                label="Transliterate to ASCII"
+                label={t("common.transliterateToAscii")}
                 selectedKeys={[String(field.value)]}
                 onSelectionChange={(k) =>
                   field.onChange(Array.from(k)[0] === "true")
                 }
               >
                 {TRANS_ASCII_OPTIONS.map((o) => (
-                  <SelectItem key={String(o.key)}>{o.label}</SelectItem>
+                  <SelectItem key={String(o.key)}>
+                    {o.key === "true" ? t("common.yes") : t("common.no")}
+                  </SelectItem>
                 ))}
               </Select>
             )}
@@ -123,7 +126,7 @@ export default function LocationGenerateConfig({
             startContent={<IconDice6Filled size={22} />}
             type="submit"
           >
-            Generate Locations
+            {t("location.generate")}
           </Button>
         </div>
       </CardBody>

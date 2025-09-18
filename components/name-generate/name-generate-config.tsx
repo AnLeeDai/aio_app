@@ -20,6 +20,8 @@ import {
   TRANS_ASCII_OPTIONS,
 } from "./name-generate-data";
 
+import { useI18n } from "@/i18n";
+
 interface NameGenForm {
   name_number: number;
   name_format: "first_last" | "first_middle_last";
@@ -37,6 +39,7 @@ export default function NameGenerateConfig({
   onGenerate,
   isLoading,
 }: NameGenerateConfigProps) {
+  const { t } = useI18n();
   const { control, handleSubmit } = useForm<NameGenForm>({
     defaultValues: {
       name_number: 10,
@@ -54,9 +57,7 @@ export default function NameGenerateConfig({
   return (
     <Card as="form" onSubmit={submit}>
       <CardHeader>
-        <h2 className="text-lg font-semibold">
-          Select options to generate random names.
-        </h2>
+        <h2 className="text-lg font-semibold">{t("name.header")}</h2>
       </CardHeader>
 
       <Divider />
@@ -72,17 +73,17 @@ export default function NameGenerateConfig({
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Number of names"
-                placeholder="e.g. 10"
+                label={t("name.numNames")}
+                placeholder={t("common.egNumber", { n: 10 })}
                 type="number"
                 value={field.value !== undefined ? String(field.value) : ""}
                 onChange={(e) => field.onChange(+e.target.value)}
               />
             )}
             rules={{
-              required: "Required",
-              min: { value: 1, message: "Min 1" },
-              max: { value: 100, message: "Max 100" },
+              required: t("validation.required"),
+              min: { value: 1, message: t("validation.min", { n: 1 }) },
+              max: { value: 100, message: t("validation.max", { n: 100 }) },
             }}
           />
 
@@ -92,14 +93,14 @@ export default function NameGenerateConfig({
             name="country"
             render={({ field }) => (
               <Select
-                label="Select a locale"
+                label={t("common.locale")}
                 selectedKeys={[field.value]}
                 onSelectionChange={(keys) =>
                   field.onChange(Array.from(keys)[0])
                 }
               >
                 {LOCALE_OPTIONS.map((o) => (
-                  <SelectItem key={o.key}>{o.label}</SelectItem>
+                  <SelectItem key={o.key}>{t(`country.${o.key}`)}</SelectItem>
                 ))}
               </Select>
             )}
@@ -111,14 +112,16 @@ export default function NameGenerateConfig({
             name="name_format"
             render={({ field }) => (
               <Select
-                label="Select name format"
+                label={t("name.selectFormat")}
                 selectedKeys={[field.value]}
                 onSelectionChange={(keys) =>
                   field.onChange(Array.from(keys)[0] as any)
                 }
               >
                 {NAME_FORMAT_OPTIONS.map((o) => (
-                  <SelectItem key={o.key}>{o.label}</SelectItem>
+                  <SelectItem key={o.key}>
+                    {t(`name.format.${o.key}`)}
+                  </SelectItem>
                 ))}
               </Select>
             )}
@@ -130,14 +133,16 @@ export default function NameGenerateConfig({
             name="gender"
             render={({ field }) => (
               <Select
-                label="Select gender"
+                label={t("name.selectGender")}
                 selectedKeys={[field.value]}
                 onSelectionChange={(keys) =>
                   field.onChange(Array.from(keys)[0] as any)
                 }
               >
                 {GENDER_OPTIONS.map((o) => (
-                  <SelectItem key={o.key}>{o.label}</SelectItem>
+                  <SelectItem key={o.key}>
+                    {t(`name.gender.${o.key}`)}
+                  </SelectItem>
                 ))}
               </Select>
             )}
@@ -149,14 +154,16 @@ export default function NameGenerateConfig({
             name="trans_ascii"
             render={({ field }) => (
               <Select
-                label="Transliterate to ASCII"
+                label={t("common.transliterateToAscii")}
                 selectedKeys={[String(field.value)]}
                 onSelectionChange={(keys) =>
                   field.onChange(Array.from(keys)[0] === "true")
                 }
               >
                 {TRANS_ASCII_OPTIONS.map((o) => (
-                  <SelectItem key={String(o.key)}>{o.label}</SelectItem>
+                  <SelectItem key={String(o.key)}>
+                    {o.key === "true" ? t("common.yes") : t("common.no")}
+                  </SelectItem>
                 ))}
               </Select>
             )}
@@ -171,7 +178,7 @@ export default function NameGenerateConfig({
             startContent={<IconDice6Filled size={22} />}
             type="submit"
           >
-            Generate Names
+            {t("name.generate")}
           </Button>
         </div>
       </CardBody>

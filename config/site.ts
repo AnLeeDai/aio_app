@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "AIO APPS",
-  description: "AIO APPS is a collection of useful applications.",
+  name: "DROP SHIPPING TOOLS",
+  description: "DROP SHIPPING TOOLS is a collection of useful applications.",
 
   routes: {
     home: "/",
@@ -19,6 +19,7 @@ export const siteConfig = {
     banrisulBankGenerate: "/banrisul-bank-generate",
     brazilGasBillGenerate: "/brazil-gas-bill-generate",
     brazilBillGenerate: "/brazil-bill-generate",
+    donate: "/donate",
   },
 
   links: {

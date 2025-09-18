@@ -12,6 +12,7 @@ import {
 import GroupButtonCopy from "../group-button-copy";
 
 import { useCopyToClipboard, CopyItem } from "@/hooks/use-copy-to-clipboard";
+import { useI18n } from "@/i18n";
 
 interface IBANGenerateResultProps {
   data: string[];
@@ -24,6 +25,7 @@ export default function IBANGenerateResult({
   selectedKeys,
   setSelectedKeys,
 }: IBANGenerateResultProps) {
+  const { t } = useI18n();
   const rows: CopyItem[] = data.map((iban, idx) => ({
     id: `row-${idx}`,
     label: iban,
@@ -52,7 +54,7 @@ export default function IBANGenerateResult({
 
       <CardBody>
         <Listbox
-          label="Generated IBANs"
+          label={t("iban.generatedLabel")}
           selectedKeys={selectedKeys}
           selectionMode="multiple"
           variant="flat"

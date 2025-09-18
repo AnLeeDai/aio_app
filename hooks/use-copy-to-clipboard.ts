@@ -1,6 +1,8 @@
 import { useCallback } from "react";
 import { addToast } from "@heroui/react";
 
+import { useI18n } from "@/i18n";
+
 export interface CopyItem {
   id: string;
   label: string;
@@ -15,6 +17,8 @@ export function useCopyToClipboard(
   setSelectedKeys: (v: Set<string>) => void,
   itemLabel = "item",
 ) {
+  const { t } = useI18n();
+
   const items: CopyItem[] = (() => {
     const seen = new Map<string, number>();
 
@@ -40,20 +44,21 @@ export function useCopyToClipboard(
         .then(() =>
           addToast({
             color: "success",
-            title: "Copied!",
-            description: `Copied ${list.length} ${itemLabel}${
-              list.length > 1 ? "s" : ""
-            }.`,
+            title: t("toasts.copied.title"),
+            description: t("toasts.copied.desc", {
+              count: list.length,
+              item: itemLabel,
+            }),
           }),
         )
         .catch(() =>
           addToast({
             color: "warning",
-            title: "Copy failed",
-            description: "Your browser blocked clipboard access.",
+            title: t("toasts.copyFailed.title"),
+            description: t("toasts.copyFailed.desc"),
           }),
         ),
-    [itemLabel],
+    [itemLabel, t],
   );
 
   /* Helpers ----------------------------------------------------- */
@@ -69,38 +74,38 @@ export function useCopyToClipboard(
     if (!list.length) {
       addToast({
         color: "warning",
-        title: "Nothing selected",
-        description: `Please choose at least one ${itemLabel}.`,
+        title: t("toasts.nothingSelected.title"),
+        description: t("toasts.nothingSelected.desc", { item: itemLabel }),
       });
 
       return;
     }
     copyRaw(list);
-  }, [selectedKeys, copyRaw, itemLabel]);
+  }, [selectedKeys, copyRaw, itemLabel, t]);
 
   /* Copy All ---------------------------------------------------- */
   const copyAll = useCallback(() => {
     if (!items.length) {
       addToast({
         color: "warning",
-        title: "Empty list",
-        description: `There is no ${itemLabel} to copy.`,
+        title: t("toasts.emptyList.title"),
+        description: t("toasts.emptyList.desc", { item: itemLabel }),
       });
 
       return;
     }
     copyRaw(buildList());
-  }, [items, copyRaw, itemLabel]);
+  }, [items, copyRaw, itemLabel, t]);
 
   /* Reset selection -------------------------------------------- */
   const resetSelection = useCallback(() => {
     setSelectedKeys(new Set());
     addToast({
       color: "success",
-      title: "Selection reset",
-      description: "All selections have been cleared.",
+      title: t("toasts.selectionReset.title"),
+      description: t("toasts.selectionReset.desc"),
     });
-  }, [setSelectedKeys]);
+  }, [setSelectedKeys, t]);
 
   return { copySelected, copyAll, resetSelection };
 }

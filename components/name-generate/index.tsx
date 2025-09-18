@@ -9,8 +9,10 @@ import NameGenerateConfig from "./name-generate-config";
 import NameGenerateResult from "./name-generate-result";
 
 import { useNamesGenerate } from "@/hooks/use-name-generate";
+import { useI18n } from "@/i18n";
 
 export default function NameGenerateContainer() {
+  const { t } = useI18n();
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
   const [names, setNames] = useState<string[]>([]);
 
@@ -28,7 +30,7 @@ export default function NameGenerateContainer() {
 
   return (
     <section>
-      <TitleHeader title="Name Generate" />
+      <TitleHeader title={t("name.title")} />
 
       <div
         className="

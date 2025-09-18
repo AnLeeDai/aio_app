@@ -9,8 +9,10 @@ import DOBGenerateConfig from "./dob-generate-config";
 import DOBGenerateResult from "./dob-generate-result";
 
 import { useDOBGenerate } from "@/hooks/use-dob-generate";
+import { useI18n } from "@/i18n";
 
 export default function DOBGenerateContainers() {
+  const { t } = useI18n();
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
   const [dob, setDOB] = useState<string[]>([]);
 
@@ -28,7 +30,7 @@ export default function DOBGenerateContainers() {
 
   return (
     <section>
-      <TitleHeader title="DOB Generate" />
+      <TitleHeader title={t("dob.title")} />
 
       <div
         className="

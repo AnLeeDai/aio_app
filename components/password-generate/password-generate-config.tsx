@@ -18,6 +18,8 @@ import {
   INCLUDE_UPPERCASE_OPTIONS,
 } from "./password-generate-data";
 
+import { useI18n } from "@/i18n";
+
 interface PasswordGenForm {
   password_num: number;
   password_length: number;
@@ -34,6 +36,7 @@ export default function PasswordGenerateConfig({
   onGenerate,
   isLoading,
 }: PasswordGenerateConfigProps) {
+  const { t } = useI18n();
   const { control, handleSubmit } = useForm<PasswordGenForm>({
     defaultValues: {
       password_num: 10,
@@ -50,9 +53,7 @@ export default function PasswordGenerateConfig({
   return (
     <Card as="form" onSubmit={onSubmit}>
       <CardHeader>
-        <h2 className="text-lg font-semibold">
-          Select options to generate random password.
-        </h2>
+        <h2 className="text-lg font-semibold">{t("password.header")}</h2>
       </CardHeader>
 
       <Divider />
@@ -68,17 +69,17 @@ export default function PasswordGenerateConfig({
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Number of passwords"
-                placeholder="e.g. 10"
+                label={t("password.numPasswords")}
+                placeholder={t("common.egNumber", { n: 10 })}
                 type="number"
                 value={field.value !== undefined ? String(field.value) : ""}
                 onChange={(e) => field.onChange(+e.target.value)}
               />
             )}
             rules={{
-              required: "Required",
-              min: { value: 1, message: "Min 1" },
-              max: { value: 100, message: "Max 100" },
+              required: t("validation.required"),
+              min: { value: 1, message: t("validation.min", { n: 1 }) },
+              max: { value: 100, message: t("validation.max", { n: 100 }) },
             }}
           />
 
@@ -91,17 +92,17 @@ export default function PasswordGenerateConfig({
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Password length"
-                placeholder="e.g. 12"
+                label={t("password.length")}
+                placeholder={t("common.egNumber", { n: 12 })}
                 type="number"
                 value={field.value !== undefined ? String(field.value) : ""}
                 onChange={(e) => field.onChange(+e.target.value)}
               />
             )}
             rules={{
-              required: "Required",
-              min: { value: 6, message: "Min 6" },
-              max: { value: 64, message: "Max 64" },
+              required: t("validation.required"),
+              min: { value: 6, message: t("validation.min", { n: 6 }) },
+              max: { value: 64, message: t("validation.max", { n: 64 }) },
             }}
           />
 
@@ -111,14 +112,16 @@ export default function PasswordGenerateConfig({
             name="include_special_chars"
             render={({ field }) => (
               <Select
-                label="Include special characters"
+                label={t("password.includeSpecial")}
                 selectedKeys={[String(field.value)]}
                 onSelectionChange={(keys) =>
                   field.onChange(Array.from(keys)[0] === "true")
                 }
               >
                 {INCLUDE_SPECIAL_CHARS_OPTIONS.map((o) => (
-                  <SelectItem key={String(o.key)}>{o.label}</SelectItem>
+                  <SelectItem key={String(o.key)}>
+                    {o.key ? t("common.yes") : t("common.no")}
+                  </SelectItem>
                 ))}
               </Select>
             )}
@@ -130,14 +133,16 @@ export default function PasswordGenerateConfig({
             name="is_uppercase"
             render={({ field }) => (
               <Select
-                label="Include uppercase"
+                label={t("password.includeUppercase")}
                 selectedKeys={[String(field.value)]}
                 onSelectionChange={(keys) =>
                   field.onChange(Array.from(keys)[0] === "true")
                 }
               >
                 {INCLUDE_UPPERCASE_OPTIONS.map((o) => (
-                  <SelectItem key={String(o.key)}>{o.label}</SelectItem>
+                  <SelectItem key={String(o.key)}>
+                    {o.key ? t("common.yes") : t("common.no")}
+                  </SelectItem>
                 ))}
               </Select>
             )}
@@ -152,7 +157,7 @@ export default function PasswordGenerateConfig({
             startContent={<IconDice6Filled size={22} />}
             type="submit"
           >
-            Generate Password
+            {t("password.generate")}
           </Button>
         </div>
       </CardBody>

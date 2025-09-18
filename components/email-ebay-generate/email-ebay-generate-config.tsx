@@ -11,6 +11,8 @@ import {
 import { IconDice6Filled } from "@tabler/icons-react";
 import { Controller, useForm } from "react-hook-form";
 
+import { useI18n } from "@/i18n";
+
 export interface EmailEbayGenForm {
   email_num: number;
 }
@@ -24,6 +26,7 @@ export default function EmailEbayGenerateConfig({
   onGenerate,
   isLoading,
 }: EmailEbayGenerateConfigProps) {
+  const { t } = useI18n();
   const { control, handleSubmit } = useForm<EmailEbayGenForm>({
     defaultValues: {
       email_num: 10,
@@ -37,9 +40,7 @@ export default function EmailEbayGenerateConfig({
   return (
     <Card as="form" onSubmit={submit}>
       <CardHeader>
-        <h2 className="text-lg font-semibold">
-          Select options to generate Hotmail accounts
-        </h2>
+        <h2 className="text-lg font-semibold">{t("ebay.header")}</h2>
       </CardHeader>
 
       <Divider />
@@ -55,17 +56,17 @@ export default function EmailEbayGenerateConfig({
                 {...field}
                 errorMessage={fieldState.error?.message}
                 isInvalid={!!fieldState.error}
-                label="Number of emails"
-                placeholder="e.g. 10"
+                label={t("ebay.numEmails")}
+                placeholder={t("common.egNumber", { n: 10 })}
                 type="number"
                 value={field.value !== undefined ? String(field.value) : ""}
                 onChange={(e) => field.onChange(+e.target.value)}
               />
             )}
             rules={{
-              required: "Required",
-              min: { value: 1, message: "Min 1" },
-              max: { value: 100, message: "Max 100" },
+              required: t("validation.required"),
+              min: { value: 1, message: t("validation.min", { n: 1 }) },
+              max: { value: 100, message: t("validation.max", { n: 100 }) },
             }}
           />
 
@@ -78,7 +79,7 @@ export default function EmailEbayGenerateConfig({
             startContent={<IconDice6Filled size={22} />}
             type="submit"
           >
-            Generate Emails
+            {t("ebay.generate")}
           </Button>
         </div>
       </CardBody>

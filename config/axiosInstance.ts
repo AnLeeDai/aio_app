@@ -33,16 +33,19 @@ export const axiosAioApp = axios.create({
 
 // Interceptor dùng chung
 const errorInterceptor = (error: any) => {
+  const t = (k: string) =>
+    k === "toasts.error.title" ? "Error" : k; /* fallback */
+
   if (error.response?.data?.detail) {
     addToast({
-      title: "Error",
+      title: t("toasts.error.title"),
       description: error.response.data.detail,
       color: "danger",
     });
   } else {
     addToast({
-      title: "Error",
-      description: error,
+      title: t("toasts.error.title"),
+      description: String(error),
       color: "danger",
     });
   }

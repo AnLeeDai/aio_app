@@ -18,9 +18,9 @@ export const allCategories = [
     cover: "/imgs/password_generate_cover.png",
   },
   {
-    name: "Hotmail Generate",
+    name: "Hotmail Ebay Generate",
     href: siteConfig.routes.hotmailGenerate,
-    description: "Generate Hotmail (Ebay) accounts (v0.0.1)",
+    description: "Generate Hotmail Ebay accounts (v0.0.1)",
     isActive: true,
     isDemo: false,
     // cover: "/imgs/password_generate_cover.png",
@@ -52,7 +52,7 @@ export const allCategories = [
   {
     name: "Passport MRZ Generate",
     href: siteConfig.routes.passportmrzGenerate,
-    description: "Generate passport mrz (v0.0.0)",
+    description: "Generate passport mrz (v0.0.1)",
     isActive: true,
     isDemo: false,
     // cover: "/imgs/locations_generate_cover.png",

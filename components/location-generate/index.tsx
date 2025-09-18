@@ -12,8 +12,10 @@ import {
   LocationRecord,
   useLocationGenerate,
 } from "@/hooks/use-location-generate";
+import { useI18n } from "@/i18n";
 
 export default function LocationGenerateContainers() {
+  const { t } = useI18n();
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set());
   const [locations, setLocations] = useState<string[]>([]);
 
@@ -46,8 +48,7 @@ export default function LocationGenerateContainers() {
           keep this in mind.
         </Chip>
       </div> */}
-
-      <TitleHeader title="Location Generate" />
+      <TitleHeader title={t("location.title")} />
       <div
         className="
                 grid gap-8 items-start
