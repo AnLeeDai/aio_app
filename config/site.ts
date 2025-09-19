@@ -15,6 +15,7 @@ export const siteConfig = {
     ibanGenerate: "/iban-generate",
     locationGenerate: "/location-generate",
     hotmailGenerate: "/hotmail-generate",
+    phoneGenerate: "/phone-generate",
     pactualBankGenerate: "/pactual-bank-generate",
     banrisulBankGenerate: "/banrisul-bank-generate",
     brazilGasBillGenerate: "/brazil-gas-bill-generate",

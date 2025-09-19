@@ -60,6 +60,14 @@
     "generate": "Tạo mật khẩu",
     "generatedLabel": "Mật khẩu đã tạo"
   },
+  "phone": {
+    "title": "Tạo số điện thoại",
+    "header": "Chọn tuỳ chọn để tạo số điện thoại ngẫu nhiên",
+    "numPhones": "Số lượng số",
+    "stripCountryCode": "Bỏ mã quốc gia",
+    "generate": "Tạo số điện thoại",
+    "generatedLabel": "Số điện thoại đã tạo"
+  },
   "iban": {
     "title": "Tạo IBAN",
     "header": "Chọn tuỳ chọn để tạo IBAN ngẫu nhiên",
@@ -133,6 +141,7 @@
     "RU": "Nga (RU)",
     "CN": "Trung Quốc (CN)",
     "KR": "Hàn Quốc (KR)",
+    "MY": "Malaysia (MY)",
     "PE": "Peru (PE)",
     "CO": "Colombia (CO)",
     "JM": "Jamaica (JM)",

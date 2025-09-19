@@ -46,7 +46,7 @@ export default function NameGenerateConfig({
       name_format: "first_last",
       country: "BR",
       gender: "male",
-      trans_ascii: false,
+      trans_ascii: true,
     },
   });
 

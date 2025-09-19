@@ -169,3 +169,13 @@ export const brazilBillGenerate = async (
 
   return data;
 };
+
+export const phoneNumberGenerate = async (payload: {
+  phone_number: number;
+  country: string;
+  strip_cc: boolean;
+}) => {
+  const { data } = await axiosAioApp.post("/api/generate/phones", payload);
+
+  return data;
+};

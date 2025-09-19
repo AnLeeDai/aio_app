@@ -34,6 +34,14 @@ export const allCategories = [
     cover: "/imgs/dob_generate_cover.png",
   },
   {
+    name: "Phone Generate",
+    href: siteConfig.routes.phoneGenerate,
+    description: "Generate random phone numbers (v0.0.1)",
+    isActive: true,
+    isDemo: false,
+    // cover: "/imgs/phone_generate_cover.png",
+  },
+  {
     name: "Passport Generate",
     href: siteConfig.routes.passportGenerate,
     description: "Generate passport id numbers (v0.0.1)",
