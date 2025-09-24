@@ -10,6 +10,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useState } from "react";
+
 import "handsontable/dist/handsontable.full.min.css";
 import { I18nProvider } from "@/i18n";
 

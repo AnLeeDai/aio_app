@@ -11,6 +11,7 @@ export const LOCALE_OPTIONS = [
   { key: "RU", label: "Russia (RU)" },
   { key: "CN", label: "China (CN)" },
   { key: "KR", label: "South Korea (KR)" },
+  { key: "PY", label: "Paraguay (PY)" },
 ];
 
 export const NAME_FORMAT_OPTIONS = [

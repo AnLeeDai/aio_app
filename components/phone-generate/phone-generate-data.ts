@@ -5,6 +5,7 @@ export const PHONE_COUNTRY_OPTIONS = [
   { key: "CO", label: "Colombia (CO)" },
   { key: "JM", label: "Jamaica (JM)" },
   { key: "CL", label: "Chile (CL)" },
+  { key: "PY", label: "Paraguay (PY)" },
 ];
 
 export const STRIP_CC_OPTIONS = [{ key: true }, { key: false }];

@@ -1,9 +1,17 @@
 "use client";
 
-import { Button, Card, CardBody, CardHeader, Divider, Input } from "@heroui/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Divider,
+  Input,
+} from "@heroui/react";
 import { IconCopy, IconHeartFilled } from "@tabler/icons-react";
 import Image from "next/image";
 import { useState } from "react";
+
 import { useI18n } from "@/i18n";
 
 export default function DonateContainer() {
@@ -23,7 +31,9 @@ export default function DonateContainer() {
       <Card>
         <CardHeader>
           <div>
-            <h2 className="text-lg font-semibold">{t("donate.bankTransfer")}</h2>
+            <h2 className="text-lg font-semibold">
+              {t("donate.bankTransfer")}
+            </h2>
             <p className="text-default-500 text-sm">{t("donate.bankDesc")}</p>
           </div>
         </CardHeader>
