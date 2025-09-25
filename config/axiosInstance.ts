@@ -7,11 +7,15 @@ const baseURL1 =
     ? "http://127.0.0.1:8000"
     : "https://text-generate-services.onrender.com");
 
+// Primary and backup URLs for AIO App
+const primaryURL = "https://aio-app-services-1.onrender.com";
+const backupURL = "https://aio-app-services-lyif.onrender.com/";
+
 const baseURL2 =
   process.env.NEXT_PUBLIC_AIO_APP_API ||
   (process.env.NODE_ENV === "development"
     ? "http://127.0.0.1:8000"
-    : "https://aio-app-services-1.onrender.com");
+    : primaryURL);
 
 // Instance 1
 export const axiosTextGenerate = axios.create({
@@ -53,5 +57,22 @@ const errorInterceptor = (error: any) => {
   return Promise.reject(error);
 };
 
+// Interceptor đặc biệt cho axiosAioApp với auto-failover
+const aioAppErrorInterceptor = async (error: any) => {
+  const config = error.config;
+
+  // Kiểm tra nếu đây là lần retry đầu tiên và đang dùng primary URL
+  if (!config._retry && config.baseURL === primaryURL) {
+    config._retry = true;
+    config.baseURL = backupURL;
+
+    // Thử lại request với backup URL
+    return axiosAioApp.request(config);
+  }
+
+  // Nếu đã retry hoặc không phải primary URL, xử lý lỗi bình thường
+  return errorInterceptor(error);
+};
+
 axiosTextGenerate.interceptors.response.use((res) => res, errorInterceptor);
-axiosAioApp.interceptors.response.use((res) => res, errorInterceptor);
+axiosAioApp.interceptors.response.use((res) => res, aioAppErrorInterceptor);
